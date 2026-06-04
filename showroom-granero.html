@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestro Showroom · Muebles de Granero</title>
+  <meta name="description" content="Visita nuestro showroom de 250m² en Arenys de Mar (Barcelona). Ve y toca los muebles antes de comprar. Pide cita por WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --g-950:#0F1E08; --g-900:#1A2E10; --g-800:#233D15;
+      --g-700:#354F22; --g-600:#4A6B2C; --g-400:#7A9E4A;
+      --cream:#F8F4ED; --cream-dark:#F2EBE0; --parchment:#EDE4CF; --sand:#E5D9C0;
+      --wood:#7C5840; --charcoal:#1C1A15; --muted:#6E6558; --faint:#9E9488;
+      --border:#D8CCBA; --border-light:#EAE0CC; --divider:#C8BAA4;
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
+    body { font-family:'Outfit',sans-serif; background:var(--cream); color:var(--charcoal); overflow-x:hidden; }
+    body.curtain-active { overflow:hidden; }
+
+    /* ── CURTAIN INTRO ── */
+    #curtain {
+      position: fixed; inset: 0; z-index: 9800;
+      background: url('showroom-barn.jpg') center/cover no-repeat;
+      will-change: transform;
+      transform: translateY(0);
+    }
+    #curtain::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(10,20,6,.45);
+    }
+    /* spinner centrado */
+    .curtain-loader {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.4rem;
+    }
+    .c-spinner {
+      width: 48px; height: 48px;
+      border: 2.5px solid rgba(255,255,255,.18);
+      border-top-color: rgba(255,255,255,.9);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+    }
+    .c-bar-wrap {
+      width: 120px; height: 2px;
+      background: rgba(255,255,255,.15);
+      border-radius: 2px; overflow: hidden;
+    }
+    .c-bar {
+      height: 100%; width: 0%;
+      background: rgba(255,255,255,.8);
+      border-radius: 2px;
+      animation: barFill 1.8s var(--ease) forwards;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes barFill { 0%{width:0%} 60%{width:75%} 100%{width:100%} }
+    #curtain.slide-down {
+      transform: translateY(100%);
+      transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.028; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+
+    /* SCROLL BAR */
+    #scroll-bar { position:fixed; top:0; left:0; height:2px; width:0%; background:var(--g-600); z-index:8999; transition:width .08s linear; }
+
+    /* CURSOR */
+    #cursor { position:fixed; width:10px; height:10px; background:var(--g-700); border-radius:50%; pointer-events:none; z-index:8997; left:-20px; top:-20px; transform:translate(-50%,-50%); mix-blend-mode:multiply; transition:width .2s var(--ease),height .2s var(--ease),transform .2s var(--ease); }
+    #cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid var(--g-600); border-radius:50%; pointer-events:none; z-index:8996; left:-20px; top:-20px; transform:translate(-50%,-50%); opacity:.6; transition:width .3s var(--ease),height .3s var(--ease),border-color .2s,opacity .2s; }
+
+    /* ANNOUNCE */
+    #announce { background:var(--g-800); padding:.45rem 0; overflow:hidden; position:relative; z-index:200; }
+    .ann-track { display:flex; align-items:center; gap:3rem; white-space:nowrap; animation:marquee 26s linear infinite; }
+    .ann-item { display:inline-flex; align-items:center; gap:.5rem; font-family:'Outfit',sans-serif; font-size:.63rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.88); flex-shrink:0; }
+    .ann-sep { color:rgba(255,255,255,.3); font-size:.8rem; flex-shrink:0; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* NAV */
+    #nav { position:sticky; top:0; z-index:100; background:var(--cream); border-bottom:1px solid var(--border-light); backdrop-filter:blur(12px); }
+    .nav-inner { max-width:1280px; margin:0 auto; padding:.85rem 2rem; display:flex; align-items:center; gap:2rem; }
+    .nav-logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; flex-shrink:0; color:var(--charcoal); }
+    .logo-mark { color:var(--g-700); }
+    .logo-stack { display:flex; flex-direction:column; line-height:1; }
+    .logo-sup { font-family:'Outfit',sans-serif; font-size:.5rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .logo-main { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:900; letter-spacing:-.01em; text-transform:uppercase; color:var(--charcoal); line-height:1.05; }
+    .nav-links { display:flex; align-items:center; justify-content:center; gap:.2rem; list-style:none; flex:1; }
+    .nav-links>li>a { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; letter-spacing:-.01em; color:var(--charcoal); text-decoration:none; padding:.45rem .9rem; border-radius:7px; display:block; position:relative; overflow:hidden; transition:color .22s; border:1px solid transparent; }
+    .nav-links>li>a::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(74,107,44,.22) 0%, transparent 68%); opacity:0; transition:opacity .22s; }
+    .nav-links>li>a:hover { color:var(--g-700); border-color:rgba(53,79,34,.15); }
+    .nav-links>li>a:hover::before { opacity:1; }
+    .nav-links>li>a.active { color:var(--g-700); }
+    .nav-links>li>a.active::after { content:''; position:absolute; bottom:0; left:.75rem; right:.75rem; height:1.5px; background:var(--g-600); border-radius:1px; }
+    .nav-drop { position:relative; }
+    .nav-drop-btn { display:flex; align-items:center; gap:.25rem; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; letter-spacing:-.01em; color:var(--charcoal); background:none; border:none; padding:.4rem .75rem; border-radius:5px; cursor:pointer; transition:color .18s,background .18s; }
+    .nav-drop-btn:hover { color:var(--g-700); background:rgba(53,79,34,.07); }
+    .nav-drop-btn svg { transition:transform .3s var(--ease); }
+    .nav-drop.open .nav-drop-btn svg { transform:rotate(180deg); }
+    .nav-drop-menu { position:absolute; top:calc(100% + .8rem); left:0; min-width:280px; background:var(--cream); border:1px solid var(--border-light); border-radius:14px; padding:.8rem 0; box-shadow:0 24px 64px rgba(28,26,21,.18); opacity:0; pointer-events:none; transform:translateY(-12px); transition:opacity .22s var(--ease),transform .28s var(--ease); }
+    .nav-drop.open .nav-drop-menu { opacity:1; pointer-events:all; transform:translateY(0); }
+    .nav-drop-menu a { display:flex; align-items:center; gap:.6rem; padding:.65rem 1.5rem; text-decoration:none; overflow:hidden; transition:color .3s ease; }
+    .nav-drop-menu a:hover { color:var(--g-600); }
+    .di-arrow-clip { width:1.2rem; height:1.2rem; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .di-arrow { display:flex; align-items:center; transform:translateX(-140%); opacity:0; transition:transform .3s ease,opacity .25s ease; color:var(--g-600); }
+    .nav-drop-menu a:hover .di-arrow { transform:translateX(0); opacity:1; }
+    .di-label { font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; letter-spacing:-.02em; color:var(--charcoal); display:block; transform:translateX(-2rem); transition:transform .3s ease,color .3s ease; }
+    .nav-drop-menu a:hover .di-label { transform:translateX(0); color:var(--g-600); }
+    .nav-drop-menu a.di-active .di-arrow { transform:translateX(0); opacity:1; color:var(--g-700); }
+    .nav-drop-menu a.di-active .di-label { transform:translateX(0); color:var(--g-700); }
+    .nav-drop-menu a.di-active:hover .di-label { color:var(--g-600); }
+    .nav-drop-menu a.di-active:hover .di-arrow { color:var(--g-600); }
+    .nav-wa { display:inline-flex; align-items:center; gap:.4rem; background:var(--g-700); color:white; padding:.5rem 1rem; border-radius:6px; font-family:'Outfit',sans-serif; font-size:.63rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase; text-decoration:none; flex-shrink:0; transition:background .18s,transform .25s var(--ease); }
+    .nav-wa:hover { background:var(--g-600); transform:translateY(-1px); }
+
+    /* ── HERO INMERSIVO (full-bleed) ── */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('showroom-barn.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.06);
+      transition: transform .1s linear;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(15,30,8,.92) 0%,
+        rgba(15,30,8,.55) 40%,
+        rgba(15,30,8,.15) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 1280px; margin: 0 auto; width: 100%;
+      padding: 0 3rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'Outfit', sans-serif; font-size: .6rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--g-400);
+      opacity: 0; transform: translateY(20px);
+    }
+    .hero-h1 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      letter-spacing: -.03em; color: white; line-height: 1.02;
+      max-width: 800px;
+      opacity: 0; transform: translateY(30px);
+    }
+    .hero-h1 em { font-style: italic; font-weight: 400; color: var(--g-400); }
+    .hero-sub {
+      font-family: 'Outfit', sans-serif; font-size: clamp(.88rem,1.4vw,1.05rem);
+      font-weight: 300; color: rgba(255,255,255,.7); line-height: 1.7;
+      max-width: 560px;
+      opacity: 0; transform: translateY(20px);
+    }
+    .hero-actions {
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+      margin-top: .5rem;
+      opacity: 0; transform: translateY(20px);
+    }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: #25D366; color: white;
+      padding: .9rem 1.8rem; border-radius: 8px;
+      font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase; text-decoration: none;
+      transition: background .18s, transform .3s var(--ease), box-shadow .2s;
+    }
+    .btn-wa:hover { background: #1ebe5a; transform: translateY(-3px); box-shadow: 0 10px 28px rgba(37,211,102,.35); }
+    .btn-scroll {
+      display: inline-flex; align-items: center; gap: .45rem;
+      color: rgba(255,255,255,.55); font-family: 'Outfit', sans-serif;
+      font-size: .65rem; font-weight: 500; letter-spacing: .08em;
+      text-transform: uppercase; text-decoration: none;
+      transition: color .18s;
+    }
+    .btn-scroll:hover { color: rgba(255,255,255,.9); }
+
+    /* Scroll indicator arrow (animated) */
+    .scroll-arrow {
+      position: absolute; bottom: 2rem; right: 3rem; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: .3rem;
+      font-family: 'Outfit', sans-serif; font-size: .55rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4);
+      opacity: 0; animation: fadein .6s var(--ease) 2s both;
+    }
+    .scroll-arrow svg { animation: bounce 1.6s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    @keyframes fadein { from{opacity:0} to{opacity:1} }
+
+    /* ── INFO BAR ── */
+    #info-bar { background: var(--g-900); }
+    .info-cards {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3,1fr);
+    }
+    .info-card {
+      padding: 2.2rem 2.5rem;
+      border-right: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: flex-start; gap: 1rem;
+      opacity: 0; transform: translateY(20px);
+    }
+    .info-card:last-child { border-right: none; }
+    .info-card.in { opacity: 1; transform: translateY(0); transition: opacity .6s var(--ease), transform .65s var(--ease); }
+    .info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(74,107,44,.2); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--g-400);
+    }
+    .info-label { font-family: 'Outfit', sans-serif; font-size: .55rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g-400); margin-bottom: .35rem; }
+    .info-value { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1rem; color: var(--cream); line-height: 1.3; }
+    .info-note { font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.45); margin-top: .2rem; }
+
+    /* ── WHY VISIT / MAP ── */
+    #why-map { background: var(--cream); padding: 7rem 2rem; }
+    .why-map-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .why-text { }
+    .why-overline { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--g-600); margin-bottom: 1.2rem; }
+    .why-h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.6rem,2.8vw,2.4rem); color: var(--charcoal); letter-spacing: -.02em; line-height: 1.2; margin-bottom: 1.5rem; }
+    .why-h2 em { font-style: italic; font-weight: 400; color: var(--g-700); }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.2rem; }
+    .why-item { display: flex; align-items: flex-start; gap: .8rem; }
+    .why-check { width: 20px; height: 20px; flex-shrink: 0; background: rgba(74,107,44,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: .15rem; color: var(--g-600); }
+    .why-item-text { font-family: 'Outfit', sans-serif; font-size: .88rem; color: var(--muted); line-height: 1.6; }
+    .why-item-text strong { color: var(--charcoal); font-weight: 600; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .55rem; background: var(--g-700); color: white; padding: .9rem 1.8rem; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; transition: background .18s, transform .3s var(--ease), box-shadow .2s; }
+    .btn-primary:hover { background: var(--g-600); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(53,79,34,.28); }
+    .map-wrapper {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(28,26,21,.12);
+      border: 1px solid var(--border-light);
+      position: sticky; top: 100px;
+    }
+    .map-wrapper iframe { display: block; width: 100%; height: 420px; border: 0; }
+    .map-footer { background: var(--cream-dark); padding: 1rem 1.4rem; display: flex; align-items: center; gap: .6rem; }
+    .map-address { font-family: 'Outfit', sans-serif; font-size: .75rem; color: var(--muted); }
+    .map-address strong { font-weight: 600; color: var(--charcoal); }
+
+    /* ── HOURS TABLE ── */
+    #hours { background: var(--parchment); padding: 5rem 2rem; }
+    .hours-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: center; }
+    .hours-title-block { }
+    .hours-h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.5rem,2.5vw,2.2rem); color: var(--charcoal); letter-spacing: -.02em; line-height: 1.2; margin-bottom: .8rem; }
+    .hours-h2 em { font-style: italic; font-weight: 400; color: var(--g-700); }
+    .hours-note { font-family: 'Outfit', sans-serif; font-size: .8rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+    .hours-wa { display: inline-flex; align-items: center; gap: .5rem; background: var(--g-700); color: white; padding: .7rem 1.4rem; border-radius: 7px; font-family: 'Outfit', sans-serif; font-size: .68rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; transition: background .18s, transform .25s var(--ease); }
+    .hours-wa:hover { background: var(--g-600); transform: translateY(-2px); }
+    .hours-grid { display: grid; grid-template-columns: 1fr; gap: .5rem; }
+    .hour-row { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1.2rem; border-radius: 8px; font-family: 'Outfit', sans-serif; }
+    .hour-row:nth-child(odd) { background: rgba(255,255,255,.6); }
+    .hour-day { font-size: .75rem; font-weight: 600; color: var(--charcoal); letter-spacing: .02em; }
+    .hour-time { font-size: .75rem; font-weight: 400; color: var(--muted); }
+    .hour-time.open { color: var(--g-600); font-weight: 600; }
+    .hour-time.closed { color: var(--faint); }
+
+    /* ── GALLERY ── */
+    #gallery { padding: 7rem 0; background: var(--cream-dark); }
+    #gallery .sec-head { padding: 0 2rem; text-align: center; margin-bottom: 3.5rem; }
+    .ornate-title { display: flex; align-items: center; justify-content: center; gap: 1rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1rem,2vw,1.3rem); letter-spacing: .06em; text-transform: uppercase; color: var(--charcoal); }
+    .title-diamond { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .55rem; }
+    .dm-line { width: 3rem; height: 1px; background: var(--divider); }
+    .dm-dot { font-size: .38rem; color: var(--charcoal); line-height: 1; }
+    .gallery-grid { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3,1fr); grid-auto-rows: 260px; gap: .7rem; }
+    .g-item { position: relative; overflow: hidden; border-radius: 5px; background: var(--sand); cursor: pointer; opacity: 0; transform: translateY(36px); }
+    .g-item.in { opacity: 1; transform: translateY(0); }
+    .g-item:first-child { grid-column: span 2; grid-row: span 2; }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+    .g-item:hover img { transform: scale(1.06); }
+    .g-overlay { position: absolute; inset: 0; background: rgba(28,26,21,0); display: flex; align-items: center; justify-content: center; transition: background .28s; }
+    .g-item:hover .g-overlay { background: rgba(28,26,21,.32); }
+    .g-overlay svg { opacity: 0; transform: scale(.7); transition: opacity .25s, transform .3s var(--ease); color: white; }
+    .g-item:hover .g-overlay svg { opacity: 1; transform: scale(1); }
+
+    /* LIGHTBOX */
+    #lightbox { position: fixed; inset: 0; background: rgba(12,24,7,.93); backdrop-filter: blur(10px); z-index: 9500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .32s var(--ease); }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+    #lb-img { max-width: 88vw; max-height: 86vh; object-fit: contain; border-radius: 4px; display: block; transform: scale(.92); transition: transform .38s var(--ease), opacity .18s; }
+    #lightbox.open #lb-img { transform: scale(1); }
+    .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: rgba(248,244,237,.1); border: 1px solid rgba(248,244,237,.18); border-radius: 50%; color: white; cursor: pointer; transition: background .18s, transform .2s var(--ease); }
+    .lb-nav:hover { background: rgba(248,244,237,.2); transform: translateY(-50%) scale(1.08); }
+    #lb-prev { left: 1.8rem; } #lb-next { right: 1.8rem; }
+    #lb-close { position: absolute; top: 1.4rem; right: 1.4rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(248,244,237,.1); border: 1px solid rgba(248,244,237,.18); border-radius: 50%; color: white; cursor: pointer; transition: background .18s; }
+    #lb-close:hover { background: rgba(248,244,237,.2); }
+    #lb-count { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); font-family: 'Outfit', sans-serif; font-size: .63rem; font-weight: 500; letter-spacing: .08em; color: rgba(255,255,255,.5); }
+
+    /* ── CTA FINAL ── */
+    #cta { background: #2E5219; padding: 7rem 2rem; text-align: center; }
+    .cta-eyebrow { font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 1.1rem; }
+    #cta h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.6rem,3vw,2.6rem); color: var(--cream); letter-spacing: -.02em; line-height: 1.25; margin-bottom: 2.2rem; }
+    #cta h2 em { font-style: italic; font-weight: 400; color: var(--g-400); }
+    .cta-big-btn { display: inline-flex; align-items: center; gap: .7rem; background: #25D366; color: white; padding: 1.1rem 2.4rem; border-radius: 9px; font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; transition: background .18s, transform .3s var(--ease), box-shadow .2s; }
+    .cta-big-btn:hover { background: #1ebe5a; transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,.35); }
+
+    /* ── FOOTER ── */
+    #footer { background: var(--g-900); padding: 5rem 2rem 3rem; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .foot-logo { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; margin-bottom: 1rem; }
+    .fl-sup { font-family: 'Outfit', sans-serif; font-size: .5rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.38); }
+    .fl-main { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; text-transform: uppercase; color: var(--cream); letter-spacing: -.01em; line-height: 1; }
+    .foot-desc { font-family: 'Outfit', sans-serif; font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.72; margin-bottom: 1.5rem; }
+    .foot-contacts a { display: block; font-family: 'Outfit', sans-serif; font-size: .75rem; color: rgba(255,255,255,.58); text-decoration: none; margin-bottom: .3rem; transition: color .18s; }
+    .foot-contacts a:hover { color: var(--g-400); }
+    .foot-col h4 { font-family: 'Outfit', sans-serif; font-size: .54rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g-400); margin-bottom: 1.2rem; }
+    .foot-col ul { list-style: none; }
+    .foot-col ul li { margin-bottom: .6rem; }
+    .foot-col ul a { font-family: 'Outfit', sans-serif; font-size: .8rem; color: rgba(255,255,255,.5); text-decoration: none; transition: color .18s; }
+    .foot-col ul a:hover { color: var(--cream); }
+    .foot-bottom { max-width: 1280px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .8rem; }
+    .foot-copy { font-family: 'Outfit', sans-serif; font-size: .68rem; color: rgba(255,255,255,.26); }
+    .foot-legal { display: flex; gap: 1.4rem; }
+    .foot-legal a { font-family: 'Outfit', sans-serif; font-size: .68rem; color: rgba(255,255,255,.32); text-decoration: none; transition: color .15s; }
+    .foot-legal a:hover { color: rgba(255,255,255,.7); }
+
+    /* WA FLOAT */
+    #wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 600; }
+    .wa-pulse { position: absolute; inset: 0; border-radius: 50%; background: #25D366; animation: wap 2.2s ease-out infinite; }
+    .wa-link { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: #25D366; border-radius: 50%; box-shadow: 0 4px 22px rgba(37,211,102,.38); text-decoration: none; transition: transform .3s var(--ease); }
+    .wa-link:hover { transform: scale(1.1); }
+    @keyframes wap { 0%{transform:scale(1);opacity:.65} 100%{transform:scale(1.85);opacity:0} }
+
+    /* REVEAL */
+    .rblock { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .75s var(--ease); }
+    .rblock.in { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media(max-width:900px) { .nav-links { display: none; } }
+    @media(max-width:768px) {
+      #cursor, #cursor-ring { display: none; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .info-cards { grid-template-columns: 1fr; }
+      .info-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .info-card:last-child { border-bottom: none; }
+      .why-map-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .map-wrapper { position: static; }
+      .hours-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 190px; padding: 0 1rem; }
+      .g-item:first-child { grid-column: span 2; grid-row: span 1; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      #lb-prev { left: .6rem; } #lb-next { right: .6rem; }
+    }
+    @media(max-width:480px) {
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 230px; }
+      .g-item:first-child { grid-column: span 1; }
+      .scroll-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURTAIN INTRO -->
+  <div id="curtain">
+    <div class="curtain-loader">
+      <div class="c-spinner"></div>
+      <div class="c-bar-wrap"><div class="c-bar"></div></div>
+    </div>
+  </div>
+
+  <div id="scroll-bar"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ANNOUNCE -->
+  <div id="announce" aria-hidden="true">
+    <div class="ann-track">
+      <span class="ann-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Transporte a toda la Península</span>
+      <span class="ann-sep">·</span>
+      <span class="ann-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Showroom 250m² en Arenys de Mar</span>
+      <span class="ann-sep">·</span>
+      <span class="ann-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Transporte a toda la Península</span>
+      <span class="ann-sep">·</span>
+      <span class="ann-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Showroom 250m² en Arenys de Mar</span>
+      <span class="ann-sep">·</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo-granero.png" alt="Muebles de Granero" height="36" style="display:block;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="showroom-granero.html" class="active">Nuestro showroom</a></li>
+        <li><a href="wallapop.html">Tienda en wallapop</a></li>
+        <li class="nav-drop">
+          <button class="nav-drop-btn" aria-expanded="false">
+            Descubre más
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nav-drop-menu">
+            <a href="taller.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">En nuestro taller</span></a>
+            <a href="fabricados.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">Muebles Fabricados</span></a>
+            <a href="entregados.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">Muebles Entregados</span></a>
+          </div>
+        </li>
+      </ul>
+      <a href="https://www.instagram.com/muebles_de_granero_/" class="nav-wa" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO INMERSIVO -->
+  <section id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <svg width="16" height="1" viewBox="0 0 16 1"><line x1="0" y1=".5" x2="16" y2=".5" stroke="#7A9E4A" stroke-width="1.5"/></svg>
+        Arenys de Mar · Barcelona
+        <svg width="16" height="1" viewBox="0 0 16 1"><line x1="0" y1=".5" x2="16" y2=".5" stroke="#7A9E4A" stroke-width="1.5"/></svg>
+      </div>
+      <h1 class="hero-h1">Ven a tocar<br>los muebles <em>en persona</em></h1>
+      <p class="hero-sub">Más de 250 m² de muebles rústicos expuestos para que los veas, los palpes y te enamores antes de comprar. Pide cita o pásate cuando quieras.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/34651585164" class="btn-wa" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Pide cita por WhatsApp
+        </a>
+        <a href="#gallery" class="btn-scroll">
+          Ver fotos del showroom
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-arrow">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- INFO BAR -->
+  <div id="info-bar">
+    <div class="info-cards">
+      <div class="info-card" id="ic0">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Dirección</div>
+          <div class="info-value">Arenys de Mar</div>
+          <div class="info-note">Barcelona — Confirma la dirección exacta por WhatsApp</div>
+        </div>
+      </div>
+      <div class="info-card" id="ic1">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Horario</div>
+          <div class="info-value">Lun–Vie 9:00–18:00</div>
+          <div class="info-note">Sáb 10:00–14:00 · Dom cerrado</div>
+        </div>
+      </div>
+      <div class="info-card" id="ic2">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Contacto</div>
+          <div class="info-value">651 585 164</div>
+          <div class="info-note">WhatsApp preferente · Respuesta rápida</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY VISIT + MAP -->
+  <section id="why-map">
+    <div class="why-map-inner">
+      <div class="rblock">
+        <div class="why-overline">
+          <svg width="16" height="1" viewBox="0 0 16 1"><line x1="0" y1=".5" x2="16" y2=".5" stroke="#4A6B2C" stroke-width="1.5"/></svg>
+          ¿Por qué visitarnos?
+        </div>
+        <h2 class="why-h2">Experiencia de compra<br><em>sin pantallas</em></h2>
+        <ul class="why-list">
+          <li class="why-item">
+            <div class="why-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="why-item-text"><strong>+250 muebles expuestos</strong> para ver, tocar y comparar materiales en directo</div>
+          </li>
+          <li class="why-item">
+            <div class="why-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="why-item-text"><strong>Asesoramiento personalizado</strong> — te ayudamos a elegir madera, acabado y medidas</div>
+          </li>
+          <li class="why-item">
+            <div class="why-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="why-item-text"><strong>Sin presión de venta</strong> — ven, inspírate y decide a tu ritmo</div>
+          </li>
+          <li class="why-item">
+            <div class="why-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="why-item-text"><strong>Presupuesto en el momento</strong> — si te gusta algo, te lo calculamos en el acto</div>
+          </li>
+        </ul>
+        <a href="https://wa.me/34651585164" class="btn-primary" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Reservar visita por WhatsApp
+        </a>
+      </div>
+
+      <div class="rblock" style="transition-delay:.12s">
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Arenys+de+Mar,+Barcelona,+Spain&z=13&output=embed"
+            width="100%" height="420"
+            style="border:0" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa de Arenys de Mar, Barcelona">
+          </iframe>
+          <div class="map-footer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--g-600)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="map-address"><strong>Arenys de Mar</strong>, Barcelona — Confirma dirección exacta por WhatsApp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORARIO -->
+  <section id="hours">
+    <div class="hours-inner">
+      <div class="rblock">
+        <h2 class="hours-h2">Horario de<br><em>apertura</em></h2>
+        <p class="hours-note">Puedes visitarnos sin cita previa, pero si la pides te garantizamos atención personalizada sin esperas.</p>
+        <a href="https://wa.me/34651585164" class="hours-wa" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Pedir cita previa
+        </a>
+      </div>
+      <div class="hours-grid rblock" style="transition-delay:.1s">
+        <div class="hour-row"><span class="hour-day">Lunes</span><span class="hour-time open">9:00 – 18:00</span></div>
+        <div class="hour-row"><span class="hour-day">Martes</span><span class="hour-time open">9:00 – 18:00</span></div>
+        <div class="hour-row"><span class="hour-day">Miércoles</span><span class="hour-time open">9:00 – 18:00</span></div>
+        <div class="hour-row"><span class="hour-day">Jueves</span><span class="hour-time open">9:00 – 18:00</span></div>
+        <div class="hour-row"><span class="hour-day">Viernes</span><span class="hour-time open">9:00 – 18:00</span></div>
+        <div class="hour-row"><span class="hour-day">Sábado</span><span class="hour-time open">10:00 – 14:00</span></div>
+        <div class="hour-row"><span class="hour-day">Domingo</span><span class="hour-time closed">Cerrado</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="sec-head rblock">
+      <div class="ornate-title">
+        <svg width="32" height="20" viewBox="0 0 40 24" fill="none" aria-hidden="true"><path d="M2 12 C8 4,20 2,32 8 M2 12 C8 20,20 22,32 16" stroke="#4A6B2C" stroke-width="1.2" fill="none"/><path d="M14 6 C16 10,16 14,14 18" stroke="#4A6B2C" stroke-width=".8" fill="none"/><path d="M22 4 C24 9,24 15,22 20" stroke="#4A6B2C" stroke-width=".8" fill="none"/><circle cx="32" cy="12" r="1.5" fill="#4A6B2C"/></svg>
+        Fotos del showroom
+        <svg width="32" height="20" viewBox="0 0 40 24" fill="none" style="transform:scaleX(-1)" aria-hidden="true"><path d="M2 12 C8 4,20 2,32 8 M2 12 C8 20,20 22,32 16" stroke="#4A6B2C" stroke-width="1.2" fill="none"/><path d="M14 6 C16 10,16 14,14 18" stroke="#4A6B2C" stroke-width=".8" fill="none"/><path d="M22 4 C24 9,24 15,22 20" stroke="#4A6B2C" stroke-width=".8" fill="none"/><circle cx="32" cy="12" r="1.5" fill="#4A6B2C"/></svg>
+      </div>
+      <div class="title-diamond"><span class="dm-line"></span><span class="dm-dot">◆</span><span class="dm-line"></span></div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="g-item" data-idx="0"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-1-scaled-qwgzx8pb1f56uonzk1zjxeuxqkyhv9jdrbckoh9smg.jpeg" alt="Showroom 1" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="1"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-2-scaled-qwgzy4nthscxtfdkdfsva6slxokz4z297pj2zvyeqw.jpeg" alt="Showroom 2" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="2"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-3-scaled-qwgzyyqnkhi44y5vhssxhz7cy0gpzadnzuemcqpt7s.jpeg" alt="Showroom 3" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="3"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-4-scaled-qwgzzo4ap0guuf50dlruvasszezmr46f3c0qb7o6js.jpeg" alt="Showroom 4" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="4"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-5-scaled-qwh00k2t5dolt5ul6zl682qh6im40tpajq78mmcso8.jpeg" alt="Showroom 5" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="5"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-6-scaled-qwh018im32m270v38a5h0wkgmj9nkyebb35v3tck6g.jpeg" alt="Showroom 6" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="6"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-7-scaled-qwh020prs3onvbq4nmca3pgag3enzvi9eyqfi46qzs.jpeg" alt="Showroom 7" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="7"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-8-scaled-qwh032bbdh44rq7ik2lcvfyq7i9cjrniw4tup6n02w.jpeg" alt="Showroom 8" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="8"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-scaled-qwh03tkmvo5g4f3x4wdjdr33foizqznqnvqxm7il2g.jpeg" alt="Showroom 9" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true">
+    <button id="lb-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="lb-nav" id="lb-prev" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-nav" id="lb-next" aria-label="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9,6 15,12 9,18"/></svg></button>
+    <div id="lb-count">1 / 9</div>
+  </div>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="rblock">
+      <p class="cta-eyebrow">Sin compromiso · Respuesta en menos de 24h</p>
+      <h2>¿Te convencemos?<br><em>Te esperamos en Arenys de Mar</em></h2>
+      <a href="https://wa.me/34651585164" class="cta-big-btn" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Pide cita por WhatsApp · 651 585 164
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="foot-logo">
+          <svg width="20" height="16" viewBox="0 0 24 18" fill="rgba(122,158,74,.7)"><rect x="0" y="0" width="24" height="3.5" rx="1.75"/><rect x="4" y="7.25" width="20" height="3.5" rx="1.75"/><rect x="0" y="14.5" width="24" height="3.5" rx="1.75"/></svg>
+          <div style="display:flex;flex-direction:column;line-height:1"><span class="fl-sup">Muebles de</span><span class="fl-main">Granero</span></div>
+        </a>
+        <p class="foot-desc">Especializados desde 2015 en muebles rústicos a medida. Showroom de 250m² en Arenys de Mar.</p>
+        <div class="foot-contacts">
+          <a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a>
+          <a href="tel:651585164">651 585 164</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Páginas</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="showroom-granero.html">Nuestro showroom</a></li>
+          <li><a href="fabricados.html">Muebles fabricados</a></li>
+          <li><a href="taller.html">En nuestro taller</a></li>
+          <li><a href="wallapop.html">Tienda wallapop</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/34651585164" target="_blank" rel="noopener">WhatsApp: 651 585 164</a></li>
+          <li><a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© Muebles de Granero 2015 — Todos los derechos reservados</p>
+      <div class="foot-legal">
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="privacidad.html#cookies">Cookies</a>
+        <a href="privacidad.html#contacto">Aviso legal</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WA FLOAT -->
+  <div id="wa-float">
+    <div class="wa-pulse"></div>
+    <a href="https://wa.me/34651585164" class="wa-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <script>
+  'use strict';
+  const EASE='cubic-bezier(0.16,1,0.3,1)';
+  const isTouch=('ontouchstart' in window)||(navigator.maxTouchPoints>0);
+
+  /* SCROLL BAR */
+  const sb=document.getElementById('scroll-bar');
+  window.addEventListener('scroll',()=>{ const d=document.documentElement; sb.style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%'; },{passive:true});
+
+  /* CURSOR */
+  if(!isTouch){
+    const dot=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function l(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l);})();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{dot.style.transform='translate(-50%,-50%) scale(1.5)';ring.style.width='50px';ring.style.height='50px';ring.style.opacity='.4';});
+      el.addEventListener('mouseleave',()=>{dot.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.6';});
+    });
+    document.querySelectorAll('.g-item').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.width='62px';ring.style.height='62px';ring.style.borderColor='rgba(248,244,237,.65)';ring.style.opacity='.8';});
+      el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='var(--g-600)';ring.style.opacity='.6';});
+    });
+  }
+
+  /* HERO PARALLAX */
+  if(!isTouch){
+    const bg=document.getElementById('hero-bg');
+    document.addEventListener('mousemove',e=>{
+      const rx=(e.clientX/window.innerWidth-.5)*2,ry=(e.clientY/window.innerHeight-.5)*2;
+      bg.style.transform=`scale(1.08) translate(${rx*-8}px,${ry*-6}px)`;
+    });
+  }
+
+  /* CURTAIN + HERO ENTRANCE */
+  const heroEls=[['.hero-tag',0],['.hero-h1',120],['.hero-sub',260],['.hero-actions',400]];
+  function revealHero(){
+    heroEls.forEach(([sel,delay])=>{
+      const el=document.querySelector(sel);
+      if(!el)return;
+      el.style.transition=`opacity .75s ease ${delay}ms,transform .8s ${EASE} ${delay}ms`;
+      el.style.opacity='1'; el.style.transform='translateY(0)';
+    });
+    setTimeout(()=>heroEls.forEach(([sel])=>{const el=document.querySelector(sel);if(el)el.style.transition='';}),1800);
+  }
+  function launchCurtain(){
+    document.body.classList.add('curtain-active');
+    const curtain=document.getElementById('curtain');
+    // pequeña pausa para que el logo de la cortina sea visible
+    setTimeout(()=>{
+      curtain.classList.add('slide-down');
+      // el hero empieza a aparecer a mitad del deslizamiento
+      setTimeout(revealHero, 400);
+      // al terminar la animación quitamos la cortina del DOM
+      setTimeout(()=>{
+        curtain.remove();
+        document.body.classList.remove('curtain-active');
+      }, 1100);
+    }, 600);
+  }
+  if(document.readyState==='complete') launchCurtain();
+  else window.addEventListener('load', launchCurtain);
+
+  /* INFO CARDS */
+  const icObs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('in'),i*100);
+        icObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  ['ic0','ic1','ic2'].forEach(id=>{const el=document.getElementById(id);if(el)icObs.observe(el);});
+
+  /* GENERAL REVEAL */
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12});
+  document.querySelectorAll('.rblock').forEach(el=>io.observe(el));
+
+  /* GALLERY STAGGER */
+  const gg=document.getElementById('gallery-grid');
+  const gio=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const items=x.target.querySelectorAll('.g-item');items.forEach((item,i)=>{item.style.transition=`opacity .7s ease ${i*70}ms,transform .75s ${EASE} ${i*70}ms`;requestAnimationFrame(()=>item.classList.add('in'));});gio.unobserve(x.target);setTimeout(()=>items.forEach(item=>item.style.transition=''),items.length*70+800);});},{threshold:.04});
+  if(gg) gio.observe(gg);
+
+  /* LIGHTBOX */
+  const IMGS=[
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-1-scaled-qwgzx8pb1f56uonzk1zjxeuxqkyhv9jdrbckoh9smg.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-2-scaled-qwgzy4nthscxtfdkdfsva6slxokz4z297pj2zvyeqw.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-3-scaled-qwgzyyqnkhi44y5vhssxhz7cy0gpzadnzuemcqpt7s.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-4-scaled-qwgzzo4ap0guuf50dlruvasszezmr46f3c0qb7o6js.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-5-scaled-qwh00k2t5dolt5ul6zl682qh6im40tpajq78mmcso8.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-6-scaled-qwh018im32m270v38a5h0wkgmj9nkyebb35v3tck6g.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-7-scaled-qwh020prs3onvbq4nmca3pgag3enzvi9eyqfi46qzs.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-8-scaled-qwh032bbdh44rq7ik2lcvfyq7i9cjrniw4tup6n02w.jpeg',
+    'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-scaled-qwh03tkmvo5g4f3x4wdjdr33foizqznqnvqxm7il2g.jpeg',
+  ];
+  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCnt=document.getElementById('lb-count');
+  let cur=0;
+  lbImg.style.transition='opacity .18s,transform .38s '+EASE;
+  function openLB(i){cur=i;lbImg.src=IMGS[i];lbCnt.textContent=(i+1)+' / '+IMGS.length;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLB(){lb.classList.remove('open');document.body.style.overflow='';}
+  function nav(d){cur=(cur+d+IMGS.length)%IMGS.length;lbImg.style.opacity='0';setTimeout(()=>{lbImg.src=IMGS[cur];lbCnt.textContent=(cur+1)+' / '+IMGS.length;lbImg.style.opacity='1';},190);}
+  document.querySelectorAll('.g-item').forEach((item,i)=>item.addEventListener('click',()=>openLB(i)));
+  document.getElementById('lb-close').addEventListener('click',closeLB);
+  document.getElementById('lb-prev').addEventListener('click',e=>{e.stopPropagation();nav(-1);});
+  document.getElementById('lb-next').addEventListener('click',e=>{e.stopPropagation();nav(1);});
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')nav(-1);if(e.key==='ArrowRight')nav(1);});
+  let ts=0; lb.addEventListener('touchstart',e=>{ts=e.touches[0].clientX;},{passive:true}); lb.addEventListener('touchend',e=>{const d=ts-e.changedTouches[0].clientX;if(Math.abs(d)>50)nav(d>0?1:-1);});
+
+  /* NAV DROPDOWN */
+  document.querySelectorAll('.nav-drop').forEach(dd=>{dd.querySelector('.nav-drop-btn').addEventListener('click',e=>{e.stopPropagation();const was=dd.classList.contains('open');document.querySelectorAll('.nav-drop').forEach(d=>d.classList.remove('open'));if(!was)dd.classList.add('open');});});
+  document.addEventListener('click',()=>{document.querySelectorAll('.nav-drop').forEach(d=>d.classList.remove('open'));});
+
+  /* NAV GLOW */
+  document.querySelectorAll('.nav-links > li > a').forEach(a=>{
+    a.addEventListener('mousemove',e=>{const r=a.getBoundingClientRect();a.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');a.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');});
+  });
+  </script>
+</body>
+</html>
