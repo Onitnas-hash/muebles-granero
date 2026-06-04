@@ -125,8 +125,9 @@
     .wf-text h4 { font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:600; color:var(--charcoal); margin-bottom:.2rem; }
     .wf-text p { font-family:'Outfit',sans-serif; font-size:.82rem; line-height:1.6; color:var(--muted); margin:0; }
     .what-visual { position:relative; }
-    .what-img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:16px; display:block; }
-    .what-badge { position:absolute; bottom:-1.5rem; right:-1.5rem; background:var(--g-800); border-radius:14px; padding:1.2rem 1.6rem; box-shadow:0 20px 60px rgba(15,30,8,.35); }
+    .what-img-wrap { border-radius:16px; overflow:hidden; width:100%; aspect-ratio:4/5; }
+    .what-img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; transform:scale(1.18); }
+    .what-badge { position:absolute; bottom:-1.5rem; right:-1.5rem; background:var(--g-800); border-radius:14px; padding:1.2rem 1.6rem; box-shadow:0 20px 60px rgba(15,30,8,.35); z-index:10; }
     .wb-num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; color:var(--g-400); line-height:1; }
     .wb-label { font-family:'Outfit',sans-serif; font-size:.65rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-top:.3rem; }
 
@@ -142,30 +143,72 @@
     .step h3 { font-family:'Outfit',sans-serif; font-size:.88rem; font-weight:700; color:var(--charcoal); margin-bottom:.5rem; }
     .step p { font-family:'Outfit',sans-serif; font-size:.8rem; line-height:1.6; color:var(--muted); }
 
-    /* PRODUCTS PREVIEW */
-    #products { padding:5rem 2rem; background:var(--cream); }
+    /* PRODUCTS PREVIEW — SPOTLIGHT CARDS */
+    #products { padding:5rem 2rem 4rem; background:var(--g-950); }
     .products-inner { max-width:1200px; margin:0 auto; }
     .section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1.5rem; }
-    .section-header h2 { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3vw,2.4rem); font-weight:700; color:var(--g-900); }
-    .section-header p { font-family:'Outfit',sans-serif; font-size:.88rem; color:var(--muted); max-width:360px; text-align:right; }
-    .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
-    .prod-card { background:var(--cream); border:1px solid var(--border-light); border-radius:14px; overflow:hidden; transition:transform .35s var(--ease),box-shadow .35s var(--ease); }
-    .prod-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(28,26,21,.11); }
-    .prod-img { aspect-ratio:4/3; overflow:hidden; }
-    .prod-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); display:block; }
-    .prod-card:hover .prod-img img { transform:scale(1.06); }
-    .prod-info { padding:1.3rem 1.4rem; }
-    .prod-cat { font-family:'Outfit',sans-serif; font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g-600); margin-bottom:.4rem; }
-    .prod-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--charcoal); margin-bottom:.4rem; line-height:1.3; }
-    .prod-desc { font-family:'Outfit',sans-serif; font-size:.8rem; line-height:1.55; color:var(--muted); }
-    .prod-footer { display:flex; align-items:center; justify-content:space-between; padding:0 1.4rem 1.3rem; }
-    .prod-status { display:inline-flex; align-items:center; gap:.35rem; font-family:'Outfit',sans-serif; font-size:.65rem; font-weight:600; letter-spacing:.05em; }
-    .prod-status.available { color:var(--g-600); }
-    .prod-status.available::before { content:''; display:block; width:6px; height:6px; background:var(--g-600); border-radius:50%; }
-    .prod-status.sold { color:var(--faint); }
-    .prod-status.sold::before { content:''; display:block; width:6px; height:6px; background:var(--divider); border-radius:50%; }
-    .prod-wa { font-family:'Outfit',sans-serif; font-size:.65rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--g-700); text-decoration:none; border:1px solid var(--g-700); border-radius:5px; padding:.25rem .7rem; transition:background .18s,color .18s; }
-    .prod-wa:hover { background:var(--g-700); color:white; }
+    .section-header h2 { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3vw,2.4rem); font-weight:700; color:var(--cream); }
+    .section-header p { font-family:'Outfit',sans-serif; font-size:.88rem; color:rgba(255,255,255,.45); max-width:360px; text-align:right; }
+    .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; align-items:stretch; }
+
+    /* Glow card base */
+    [data-glow] {
+      --base:115; --spread:55; --radius:16; --border:2;
+      --backdrop:hsl(0 0% 10% / .55); --backup-border:hsl(120 60% 50% / .18);
+      --size:520; --outer:1;
+      --border-size:calc(var(--border,2) * 1px);
+      --spotlight-size:calc(var(--size,150) * 1px);
+      --hue:calc(var(--base) + (var(--xp,0) * var(--spread,0)));
+      background-image:radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x,0) * 1px) calc(var(--y,0) * 1px), hsl(var(--hue) 100% 60% / .22), transparent);
+      background-color:var(--backdrop);
+      background-size:calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+      background-position:50% 50%;
+      background-attachment:fixed;
+      border:var(--border-size) solid var(--backup-border);
+      border-radius:calc(var(--radius) * 1px);
+      position:relative;
+      touch-action:none;
+    }
+    [data-glow]::before,[data-glow]::after {
+      pointer-events:none; content:""; position:absolute;
+      inset:calc(var(--border-size) * -1);
+      border:var(--border-size) solid transparent;
+      border-radius:calc(var(--radius) * 1px);
+      background-attachment:fixed;
+      background-size:calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+      background-repeat:no-repeat; background-position:50% 50%;
+      mask:linear-gradient(transparent,transparent),linear-gradient(white,white);
+      -webkit-mask:linear-gradient(transparent,transparent),linear-gradient(white,white);
+      mask-clip:padding-box,border-box; -webkit-mask-clip:padding-box,border-box;
+      mask-composite:intersect; -webkit-mask-composite:source-in;
+    }
+    [data-glow]::before {
+      background-image:radial-gradient(calc(var(--spotlight-size) * .6) calc(var(--spotlight-size) * .6) at calc(var(--x,0) * 1px) calc(var(--y,0) * 1px), hsl(var(--hue) 100% 55% / 1), transparent 100%);
+      filter:brightness(2.5);
+    }
+    [data-glow]::after {
+      background-image:radial-gradient(calc(var(--spotlight-size) * .35) calc(var(--spotlight-size) * .35) at calc(var(--x,0) * 1px) calc(var(--y,0) * 1px), hsl(130 80% 85% / 1), transparent 100%);
+    }
+    [data-glow] [data-glow] { position:absolute; inset:0; will-change:filter; opacity:var(--outer,1); border-radius:calc(var(--radius) * 1px); filter:blur(calc(var(--border-size) * 10)); background:none; pointer-events:none; border:none; }
+    [data-glow]>[data-glow]::before { inset:-10px; border-width:10px; }
+
+    /* Card inner content */
+    .gc-content { position:relative; z-index:1; padding:1.2rem; display:flex; flex-direction:column; height:100%; }
+    .gc-img { aspect-ratio:4/3; overflow:hidden; border-radius:10px; margin-bottom:1.1rem; flex-shrink:0; }
+    .gc-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease); }
+    [data-glow]:hover .gc-img img { transform:scale(1.05); }
+    .gc-cat { font-family:'Outfit',sans-serif; font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g-400); margin-bottom:.35rem; }
+    .gc-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--cream); margin-bottom:.5rem; line-height:1.3; }
+    .gc-desc { font-family:'Outfit',sans-serif; font-size:.8rem; line-height:1.55; color:rgba(255,255,255,.48); flex:1; }
+    .gc-footer { display:flex; align-items:center; justify-content:space-between; margin-top:1rem; }
+    .gc-status { display:inline-flex; align-items:center; gap:.35rem; font-family:'Outfit',sans-serif; font-size:.65rem; font-weight:600; }
+    .gc-status.available { color:var(--g-400); }
+    .gc-status.available::before { content:''; display:block; width:6px; height:6px; background:var(--g-400); border-radius:50%; }
+    .gc-status.sold { color:rgba(255,255,255,.28); }
+    .gc-status.sold::before { content:''; display:block; width:6px; height:6px; background:rgba(255,255,255,.18); border-radius:50%; }
+    .gc-link { font-family:'Outfit',sans-serif; font-size:.63rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:rgba(255,255,255,.65); text-decoration:none; border:1px solid rgba(255,255,255,.18); border-radius:5px; padding:.28rem .75rem; transition:background .18s,border-color .18s,color .18s; }
+    .gc-link:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.4); color:white; }
+    .products-cta { text-align:center; margin-top:2.8rem; }
 
     /* CTA SECTION */
     #cta { padding:6rem 2rem; background:var(--g-900); position:relative; overflow:hidden; }
@@ -201,6 +244,8 @@
     .foot-col ul { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
     .foot-col ul a { font-family:'Outfit',sans-serif; font-size:.82rem; color:rgba(255,255,255,.5); text-decoration:none; transition:color .15s; }
     .foot-col ul a:hover { color:rgba(255,255,255,.85); }
+    .foot-sub-title { font-family:'Outfit',sans-serif; font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g-400); margin-top:.7rem; cursor:default; }
+    .foot-sub-item a { padding-left:.7rem; }
     .foot-bottom { max-width:1200px; margin:0 auto; padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem; }
     .foot-copy { font-family:'Outfit',sans-serif; font-size:.72rem; color:rgba(255,255,255,.25); }
     .foot-legal { display:flex; gap:1.4rem; }
@@ -378,7 +423,7 @@
         </div>
       </div>
       <div class="what-visual rblock" style="transition-delay:.12s">
-        <img class="what-img" src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbxkbx73xqbq1l9qqf6j0a4t1oetcfz5xnwz0xcw.jpeg" alt="Muebles fabricados artesanalmente" loading="lazy">
+        <div class="what-img-wrap"><img class="what-img" src="cama-granero.webp" alt="Cama rústica de madera maciza" loading="lazy"></div>
         <div class="what-badge">
           <div class="wb-num">+50</div>
           <div class="wb-label">Artículos publicados</div>
@@ -433,51 +478,54 @@
     <div class="products-inner">
       <div class="section-header rblock">
         <h2>Muestra de piezas</h2>
-        <p>Una selección de lo que puedes encontrar. El stock cambia — visita la tienda para ver la disponibilidad actual.</p>
+        <p>Artículos actualizados — visita la tienda para ver la disponibilidad actual.</p>
       </div>
       <div class="products-grid">
-        <div class="prod-card rblock">
-          <div class="prod-img">
-            <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/muebles-AA-qwmbyolfp54h5ci8wxf3jbvjbfhgwcf6lo8sb0n608.jpeg" alt="Mesa de madera" loading="lazy">
-          </div>
-          <div class="prod-info">
-            <div class="prod-cat">Mesa · Madera maciza</div>
-            <div class="prod-name">Mesa rústica de roble</div>
-            <div class="prod-desc">Pieza de exposición retirada del showroom. Madera de roble macizo con acabado cera natural.</div>
-          </div>
-          <div class="prod-footer">
-            <span class="prod-status available">Disponible</span>
-            <a href="https://wa.me/34651585164" class="prod-wa" target="_blank" rel="noopener">Consultar</a>
-          </div>
-        </div>
-        <div class="prod-card rblock" style="transition-delay:.08s">
-          <div class="prod-img">
-            <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados1-qwmbypm6yhwi4d0i1hnhfxv2r48nmqkmo13y0wvsk0.jpeg" alt="Estantería" loading="lazy">
-          </div>
-          <div class="prod-info">
-            <div class="prod-cat">Estantería · Pino</div>
-            <div class="prod-name">Estantería industrial a medida</div>
-            <div class="prod-desc">Madera de pino macizo con estructura metálica negra. Prototipo de taller en perfecto estado.</div>
-          </div>
-          <div class="prod-footer">
-            <span class="prod-status available">Disponible</span>
-            <a href="https://wa.me/34651585164" class="prod-wa" target="_blank" rel="noopener">Consultar</a>
+        <div data-glow class="rblock">
+          <div data-glow></div>
+          <div class="gc-content">
+            <div class="gc-img"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/muebles-AA-qwmbyolfp54h5ci8wxf3jbvjbfhgwcf6lo8sb0n608.jpeg" alt="Mesa rústica de roble" loading="lazy"></div>
+            <div class="gc-cat">Mesa · Madera maciza</div>
+            <div class="gc-name">Mesa rústica de roble</div>
+            <div class="gc-desc">Pieza de exposición retirada del showroom. Roble macizo con acabado cera natural.</div>
+            <div class="gc-footer">
+              <span class="gc-status available">Disponible</span>
+              <a href="https://es.wallapop.com/user/mueblesr-440351629" class="gc-link" target="_blank" rel="noopener">Ver en Wallapop</a>
+            </div>
           </div>
         </div>
-        <div class="prod-card rblock" style="transition-delay:.16s">
-          <div class="prod-img">
-            <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbxkbx73xqbq1l9qqf6j0a4t1oetcfz5xnwz0xcw.jpeg" alt="Aparador" loading="lazy">
-          </div>
-          <div class="prod-info">
-            <div class="prod-cat">Aparador · Roble</div>
-            <div class="prod-name">Aparador rústico bajo</div>
-            <div class="prod-desc">Aparador de roble macizo con puertas abatibles y herrajes vintage. Segunda oportunidad.</div>
-          </div>
-          <div class="prod-footer">
-            <span class="prod-status sold">Vendido</span>
-            <a href="https://es.wallapop.com/user/mueblesr-440351629" class="prod-wa" target="_blank" rel="noopener">Ver tienda</a>
+        <div data-glow class="rblock" style="transition-delay:.08s">
+          <div data-glow></div>
+          <div class="gc-content">
+            <div class="gc-img"><img src="cama-granero.webp" alt="Cama rústica de madera maciza" loading="lazy"></div>
+            <div class="gc-cat">Cama · Madera reciclada</div>
+            <div class="gc-name">Cama box rústica</div>
+            <div class="gc-desc">Cama fabricada con madera reciclada de palets. Acabado natural envejecido, estructura sólida.</div>
+            <div class="gc-footer">
+              <span class="gc-status available">Disponible</span>
+              <a href="https://es.wallapop.com/user/mueblesr-440351629" class="gc-link" target="_blank" rel="noopener">Ver en Wallapop</a>
+            </div>
           </div>
         </div>
+        <div data-glow class="rblock" style="transition-delay:.16s">
+          <div data-glow></div>
+          <div class="gc-content">
+            <div class="gc-img"><img src="puerta-granero.webp" alt="Puerta corredera rústica" loading="lazy"></div>
+            <div class="gc-cat">Puerta · Madera maciza</div>
+            <div class="gc-name">Puerta corredera rústica</div>
+            <div class="gc-desc">Puerta corredera estilo granero con estructura de madera maciza y tablas verticales. Pieza única.</div>
+            <div class="gc-footer">
+              <span class="gc-status available">Disponible</span>
+              <a href="https://es.wallapop.com/user/mueblesr-440351629" class="gc-link" target="_blank" rel="noopener">Ver en Wallapop</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="products-cta rblock" style="transition-delay:.2s">
+        <a href="https://es.wallapop.com/user/mueblesr-440351629" class="btn-wallapop" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          Visita nuestra tienda de Wallapop
+        </a>
       </div>
     </div>
   </section>
@@ -528,10 +576,12 @@
         <h4>Páginas</h4>
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="showroom-granero.html">Showroom</a></li>
-          <li><a href="taller.html">Nuestro taller</a></li>
-          <li><a href="fabricados.html">Muebles fabricados</a></li>
+          <li><a href="showroom-granero.html">Nuestro showroom</a></li>
           <li><a href="wallapop.html">Tienda wallapop</a></li>
+          <li class="foot-sub-title">Descubre más</li>
+          <li class="foot-sub-item"><a href="taller.html">En nuestro taller</a></li>
+          <li class="foot-sub-item"><a href="fabricados.html">Muebles Fabricados</a></li>
+          <li class="foot-sub-item"><a href="entregados.html">Muebles Entregados</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -652,6 +702,16 @@
       stage.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
       stage.parentElement.addEventListener('mouseleave', () => { timer = setInterval(() => { idx = (idx + 1) % IMGS.length; render(); }, 4000); });
     })();
+
+    // SPOTLIGHT CARDS — pointer tracking
+    document.addEventListener('pointermove', e => {
+      document.querySelectorAll('[data-glow]').forEach(el => {
+        el.style.setProperty('--x', e.clientX.toFixed(2));
+        el.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
+        el.style.setProperty('--y', e.clientY.toFixed(2));
+        el.style.setProperty('--yp', (e.clientY / window.innerHeight).toFixed(2));
+      });
+    });
 
     // REVEAL
     const obs = new IntersectionObserver(entries => {

@@ -93,6 +93,8 @@
     .g-item { position:relative; overflow:hidden; border-radius:5px; background:var(--sand); cursor:pointer; opacity:0; transform:translateY(36px); }
     .g-item.in { opacity:1; transform:translateY(0); }
     .g-item:first-child { grid-column:span 2; grid-row:span 2; }
+    .g-item-logo { background:var(--g-900) !important; border:2px solid var(--g-600) !important; }
+    .g-item-logo img { object-fit:contain !important; padding:4rem; filter:brightness(1.05); }
     .g-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease); }
     .g-item:hover img { transform:scale(1.06); }
     .g-overlay { position:absolute; inset:0; background:rgba(28,26,21,0); display:flex; align-items:center; justify-content:center; transition:background .28s; }
@@ -137,6 +139,8 @@
     .foot-col ul li { margin-bottom:.6rem; }
     .foot-col ul a { font-family:'Outfit',sans-serif; font-size:.8rem; color:rgba(255,255,255,.5); text-decoration:none; transition:color .18s; }
     .foot-col ul a:hover { color:var(--cream); }
+    .foot-sub-title { font-family:'Outfit',sans-serif; font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--g-400); margin-top:.7rem; cursor:default; }
+    .foot-sub-item a { padding-left:.7rem; }
     .foot-bottom { max-width:1280px; margin:2rem auto 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8rem; }
     .foot-copy { font-family:'Outfit',sans-serif; font-size:.68rem; color:rgba(255,255,255,.26); }
     .foot-legal { display:flex; gap:1.4rem; }
@@ -225,7 +229,7 @@
 
   <section id="gallery">
     <div class="gallery-grid" id="gallery-grid">
-      <div class="g-item" data-idx="0"><img src="https://mueblesdegranero.es/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-21-at-15.56.10-2.jpeg" alt="Entregado 1" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item g-item-logo" data-idx="0"><img src="logo-granero.png" alt="Muebles de Granero — Logo" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="1"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-1-1-r72dk1b79x4h86kimlh1rwprgeu8hog9st7yrayvjc.jpeg" alt="Entregado 2" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="2"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-2-1-r72dk36vnl71vehsbmaaww8on6kyx2nqh2ixpuw36w.jpeg" alt="Entregado 3" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="3"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-3-1-r72dk44puf8c70gf64oxhe058kgc4rrgt76f74up0o.jpeg" alt="Entregado 4" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
@@ -272,7 +276,7 @@
         <p class="foot-desc">Especializados desde 2015 en muebles rústicos a medida con madera maciza.</p>
         <div class="foot-contacts"><a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a><a href="tel:651585164">651 585 164</a></div>
       </div>
-      <div class="foot-col"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="showroom-granero.html">Showroom</a></li><li><a href="taller.html">Nuestro taller</a></li><li><a href="wallapop.html">Tienda wallapop</a></li></ul></div>
+      <div class="foot-col"><h4>Páginas</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="showroom-granero.html">Nuestro showroom</a></li><li><a href="wallapop.html">Tienda wallapop</a></li><li class="foot-sub-title">Descubre más</li><li class="foot-sub-item"><a href="taller.html">En nuestro taller</a></li><li class="foot-sub-item"><a href="fabricados.html">Muebles Fabricados</a></li><li class="foot-sub-item"><a href="entregados.html">Muebles Entregados</a></li></ul></div>
       <div class="foot-col"><h4>Contacto directo</h4><ul><li><a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a></li><li><a href="tel:651585164">651 585 164</a></li><li><a href="https://wa.me/34651585164" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
     </div>
     <div class="foot-bottom">
@@ -311,7 +315,7 @@
   const gio=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const items=x.target.querySelectorAll('.g-item');items.forEach((item,i)=>{item.style.transition=`opacity .7s ease ${i*60}ms,transform .75s ${EASE} ${i*60}ms`;requestAnimationFrame(()=>item.classList.add('in'));});gio.unobserve(x.target);setTimeout(()=>items.forEach(item=>item.style.transition=''),items.length*60+800);});},{threshold:.05});
   if(gg) gio.observe(gg);
   const IMGS=[
-    'https://mueblesdegranero.es/wp-content/uploads/2024/10/WhatsApp-Image-2024-10-21-at-15.56.10-2.jpeg',
+    'logo-granero.png',
     'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-1-1-r72dk1b79x4h86kimlh1rwprgeu8hog9st7yrayvjc.jpeg',
     'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-2-1-r72dk36vnl71vehsbmaaww8on6kyx2nqh2ixpuw36w.jpeg',
     'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.49-3-1-r72dk44puf8c70gf64oxhe058kgc4rrgt76f74up0o.jpeg',
