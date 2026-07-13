@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -230,8 +230,8 @@
     .info-note { font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.45); margin-top: .2rem; }
 
     /* ── WHY VISIT / MAP ── */
-    #why-map { background: var(--cream); padding: 7rem 2rem; }
-    .why-map-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    #why-map { background: var(--cream); padding: 4.5rem 2rem; }
+    .why-map-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .why-text { }
     .why-overline { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--g-600); margin-bottom: 1.2rem; }
     .why-h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.6rem,2.8vw,2.4rem); color: var(--charcoal); letter-spacing: -.02em; line-height: 1.2; margin-bottom: 1.5rem; }
@@ -239,20 +239,33 @@
     .why-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.2rem; }
     .why-item { display: flex; align-items: flex-start; gap: .8rem; }
     .why-check { width: 20px; height: 20px; flex-shrink: 0; background: rgba(74,107,44,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: .15rem; color: var(--g-600); }
+    .why-hours-head { display: flex; align-items: center; gap: .5rem; font-family: 'Outfit', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g-600); margin-bottom: 1rem; }
     .why-item-text { font-family: 'Outfit', sans-serif; font-size: .88rem; color: var(--muted); line-height: 1.6; }
     .why-item-text strong { color: var(--charcoal); font-weight: 600; }
     .btn-primary { display: inline-flex; align-items: center; gap: .55rem; background: var(--g-700); color: white; padding: .9rem 1.8rem; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; transition: background .18s, transform .3s var(--ease), box-shadow .2s; }
     .btn-primary:hover { background: var(--g-600); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(53,79,34,.28); }
-    .map-wrapper {
+    .visit-card {
       border-radius: 12px; overflow: hidden;
       box-shadow: 0 20px 60px rgba(28,26,21,.12);
       border: 1px solid var(--border-light);
       position: sticky; top: 100px;
+      background: var(--cream);
     }
-    .map-wrapper iframe { display: block; width: 100%; height: 420px; border: 0; }
-    .map-footer { background: var(--cream-dark); padding: 1rem 1.4rem; display: flex; align-items: center; gap: .6rem; }
-    .map-address { font-family: 'Outfit', sans-serif; font-size: .75rem; color: var(--muted); }
-    .map-address strong { font-weight: 600; color: var(--charcoal); }
+    .visit-card-header {
+      background: var(--g-800); padding: 2rem 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .visit-card-tag { font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+    .visit-card-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: white; line-height: 1.2; }
+    .visit-card-title em { font-style: italic; font-weight: 400; color: rgba(255,255,255,.75); }
+    .visit-card-body { padding: 1.8rem 2rem; display: flex; flex-direction: column; gap: 1.4rem; }
+    .visit-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .visit-icon { width: 38px; height: 38px; border-radius: 8px; background: rgba(74,107,44,.1); border: 1px solid rgba(74,107,44,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--g-600); }
+    .visit-row-label { font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem; }
+    .visit-row-value { font-family: 'Outfit', sans-serif; font-size: .88rem; color: var(--charcoal); line-height: 1.5; font-weight: 500; }
+    .visit-divider { height: 1px; background: var(--border-light); }
+    .visit-card-footer { padding: 1.4rem 2rem 1.8rem; background: var(--cream-dark); border-top: 1px solid var(--border-light); }
+    .visit-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(74,107,44,.1); border: 1px solid rgba(74,107,44,.25); border-radius: 6px; padding: .45rem .9rem; font-family: 'Outfit', sans-serif; font-size: .72rem; font-weight: 600; color: var(--g-700); }
 
     /* ── HOURS TABLE ── */
     #hours { background: var(--parchment); padding: 5rem 2rem; }
@@ -397,7 +410,7 @@
   <nav id="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="logo-granero.png" alt="Muebles de Granero" height="36" style="display:block;">
+        
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Inicio</a></li>
@@ -432,8 +445,8 @@
         Arenys de Mar · Barcelona
         <svg width="16" height="1" viewBox="0 0 16 1"><line x1="0" y1=".5" x2="16" y2=".5" stroke="#7A9E4A" stroke-width="1.5"/></svg>
       </div>
-      <h1 class="hero-h1">Ven a tocar<br>los muebles <em>en persona</em></h1>
-      <p class="hero-sub">Más de 250 m² de muebles rústicos expuestos para que los veas, los palpes y te enamores antes de comprar. Pide cita o pásate cuando quieras.</p>
+      <h1 class="hero-h1">Ven a ver muebles y materiales <em>en persona.</em></h1>
+      <p class="hero-sub">En Muebles de Granero disponemos de un showroom de más de 250 m² con todo tipo de muebles expuestos. Pide hora mediante WhatsApp y ven a visitarnos en Arenys de Mar (Barcelona).</p>
       <div class="hero-actions">
         <a href="https://wa.me/34651585164" class="btn-wa" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
@@ -521,45 +534,24 @@
       </div>
 
       <div class="rblock" style="transition-delay:.12s">
-        <div class="map-wrapper">
-          <iframe
-            src="https://maps.google.com/maps?q=Arenys+de+Mar,+Barcelona,+Spain&z=13&output=embed"
-            width="100%" height="420"
-            style="border:0" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mapa de Arenys de Mar, Barcelona">
-          </iframe>
-          <div class="map-footer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--g-600)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span class="map-address"><strong>Arenys de Mar</strong>, Barcelona — Confirma dirección exacta por WhatsApp</span>
-          </div>
+        <div class="why-hours-head">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Horario de apertura
+        </div>
+        <div class="hours-grid">
+          <div class="hour-row"><span class="hour-day">Lunes</span><span class="hour-time open">9:00 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Martes</span><span class="hour-time open">9:00 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Miércoles</span><span class="hour-time open">9:00 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Jueves</span><span class="hour-time open">9:00 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Viernes</span><span class="hour-time open">9:00 – 18:00</span></div>
+          <div class="hour-row"><span class="hour-day">Sábado</span><span class="hour-time open">10:00 – 14:00</span></div>
+          <div class="hour-row"><span class="hour-day">Domingo</span><span class="hour-time closed">Cerrado</span></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HORARIO -->
-  <section id="hours">
-    <div class="hours-inner">
-      <div class="rblock">
-        <h2 class="hours-h2">Horario de<br><em>apertura</em></h2>
-        <p class="hours-note">Puedes visitarnos sin cita previa, pero si la pides te garantizamos atención personalizada sin esperas.</p>
-        <a href="https://wa.me/34651585164" class="hours-wa" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Pedir cita previa
-        </a>
-      </div>
-      <div class="hours-grid rblock" style="transition-delay:.1s">
-        <div class="hour-row"><span class="hour-day">Lunes</span><span class="hour-time open">9:00 – 18:00</span></div>
-        <div class="hour-row"><span class="hour-day">Martes</span><span class="hour-time open">9:00 – 18:00</span></div>
-        <div class="hour-row"><span class="hour-day">Miércoles</span><span class="hour-time open">9:00 – 18:00</span></div>
-        <div class="hour-row"><span class="hour-day">Jueves</span><span class="hour-time open">9:00 – 18:00</span></div>
-        <div class="hour-row"><span class="hour-day">Viernes</span><span class="hour-time open">9:00 – 18:00</span></div>
-        <div class="hour-row"><span class="hour-day">Sábado</span><span class="hour-time open">10:00 – 14:00</span></div>
-        <div class="hour-row"><span class="hour-day">Domingo</span><span class="hour-time closed">Cerrado</span></div>
-      </div>
-    </div>
-  </section>
 
   <!-- GALLERY -->
   <section id="gallery">
@@ -572,15 +564,21 @@
       <div class="title-diamond"><span class="dm-line"></span><span class="dm-dot">◆</span><span class="dm-line"></span></div>
     </div>
     <div class="gallery-grid" id="gallery-grid">
-      <div class="g-item" data-idx="0"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-1-scaled-qwgzx8pb1f56uonzk1zjxeuxqkyhv9jdrbckoh9smg.jpeg" alt="Showroom 1" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="1"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-2-scaled-qwgzy4nthscxtfdkdfsva6slxokz4z297pj2zvyeqw.jpeg" alt="Showroom 2" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="2"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-3-scaled-qwgzyyqnkhi44y5vhssxhz7cy0gpzadnzuemcqpt7s.jpeg" alt="Showroom 3" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="3"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-4-scaled-qwgzzo4ap0guuf50dlruvasszezmr46f3c0qb7o6js.jpeg" alt="Showroom 4" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="4"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-5-scaled-qwh00k2t5dolt5ul6zl682qh6im40tpajq78mmcso8.jpeg" alt="Showroom 5" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="5"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-6-scaled-qwh018im32m270v38a5h0wkgmj9nkyebb35v3tck6g.jpeg" alt="Showroom 6" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="6"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-7-scaled-qwh020prs3onvbq4nmca3pgag3enzvi9eyqfi46qzs.jpeg" alt="Showroom 7" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="7"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-8-scaled-qwh032bbdh44rq7ik2lcvfyq7i9cjrniw4tup6n02w.jpeg" alt="Showroom 8" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="g-item" data-idx="8"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2024-10-26-at-12.21.07-scaled-qwh03tkmvo5g4f3x4wdjdr33foizqznqnvqxm7il2g.jpeg" alt="Showroom 9" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="0"><img src="showroom-1.jpg" alt="Showroom 1" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="1"><img src="showroom-2.jpg" alt="Showroom 2" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="2"><img src="showroom-3.jpg" alt="Showroom 3" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="3"><img src="showroom-4.jpg" alt="Showroom 4" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="4"><img src="showroom-5.jpg" alt="Showroom 5" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="5"><img src="showroom-6.jpg" alt="Showroom 6" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="6"><img src="showroom-7.jpg" alt="Showroom 7" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="7"><img src="showroom-8.jpg" alt="Showroom 8" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="8"><img src="showroom-9.jpg" alt="Showroom 9" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="9"><img src="showroom-10.jpg" alt="Showroom 10" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="10"><img src="showroom-11.jpg" alt="Showroom 11" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="11"><img src="showroom-12.jpg" alt="Showroom 12" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="12"><img src="showroom-13.jpg" alt="Showroom 13" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="13"><img src="showroom-14.jpg" alt="Showroom 14" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="g-item" data-idx="14"><img src="showroom-15.jpg" alt="Showroom 15" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
   </section>
 
@@ -590,7 +588,7 @@
     <button class="lb-nav" id="lb-prev" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg></button>
     <img id="lb-img" src="" alt="">
     <button class="lb-nav" id="lb-next" aria-label="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9,6 15,12 9,18"/></svg></button>
-    <div id="lb-count">1 / 9</div>
+    <div id="lb-count">1 / 15</div>
   </div>
 
   <!-- CTA -->
@@ -777,3 +775,4 @@
   </script>
 </body>
 </html>
+
