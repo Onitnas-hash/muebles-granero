@@ -160,7 +160,7 @@
     .hb-feat-title { font-family: 'Outfit', sans-serif; font-size: .56rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--charcoal); margin-bottom: .25rem; line-height: 1.45; }
     .hb-feat-desc { font-family: 'Outfit', sans-serif; font-size: .78rem; color: var(--muted); line-height: 1.55; }
     .hb-bot-dm { display: none; }
-    @media (max-width: 768px) { #hero { padding: .8rem; } .hb-wrap { min-height: auto; } .hb-brand-big { font-size: 3rem; } .hb-bottom { grid-template-columns: 1fr; } .hb-feat { border-right: none; border-bottom: 1px solid rgba(200,184,158,.35); } .hb-feat:last-child { border-bottom: none; } }
+    @media (max-width: 768px) { #hero { padding: .4rem .4rem 0; } .hb-wrap { min-height: auto; } .hb-brand-big { font-size: 3rem; } .hb-bottom { grid-template-columns: 1fr; } .hb-feat { border-right: none; border-bottom: 1px solid rgba(200,184,158,.35); } .hb-feat:last-child { border-bottom: none; } }
 
     /* ── STATS BAR ── */
     #stats { background: var(--parchment); border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); padding: 2.5rem 2rem; }
@@ -204,6 +204,43 @@
     @media (max-width: 1024px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
 
     /* ── GALLERY SECTION ── */
+    /* ── CATEGORÍAS ── */
+    #categories { background: var(--charcoal); padding: 5.5rem 2rem; }
+    .cat-head { max-width: 1280px; margin: 0 auto 3rem; text-align: center; }
+    .cat-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Outfit', sans-serif; font-size: .58rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--g-400); margin-bottom: 1rem; }
+    .cat-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 700; color: var(--cream); letter-spacing: -.02em; line-height: 1.15; }
+    .cat-h2 em { font-style: italic; font-weight: 400; color: var(--g-400); }
+    .cat-sub { font-family: 'Outfit', sans-serif; font-size: .9rem; color: var(--faint); margin-top: .9rem; }
+    .cat-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 260px; gap: 10px; }
+    .cat-item { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; text-decoration: none; display: block; }
+    .cat-item::before { content: ''; position: absolute; inset: 0; background: var(--cat-img, none) center/cover no-repeat, var(--cat-color); transition: transform .65s var(--ease); }
+    .cat-item:hover::before { transform: scale(1.07); }
+    .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,8,4,.82) 0%, rgba(10,8,4,.25) 50%, rgba(10,8,4,.05) 100%); transition: opacity .3s; }
+    .cat-item:hover .cat-overlay { opacity: .75; }
+    .cat-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.4rem 1.6rem; display: flex; align-items: flex-end; justify-content: space-between; }
+    .cat-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: white; line-height: 1.2; transition: transform .35s var(--ease); }
+    .cat-item:hover .cat-name { transform: translateY(-3px); }
+    .cat-item.large .cat-name { font-size: 1.9rem; }
+    .cat-item.wide .cat-name { font-size: 1.4rem; }
+    .cat-arrow { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); display: flex; align-items: center; justify-content: center; color: white; opacity: 0; transform: translateX(-6px); transition: opacity .3s, transform .35s var(--ease); flex-shrink: 0; }
+    .cat-item:hover .cat-arrow { opacity: 1; transform: translateX(0); }
+    .cat-badge { position: absolute; top: 1rem; left: 1rem; background: var(--g-600); color: white; font-family: 'Outfit', sans-serif; font-size: .55rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .28rem .7rem; border-radius: 4px; }
+    /* Grid placement */
+    .cat-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; } /* Mesas – grande */
+    .cat-item:nth-child(5) { grid-column: 2 / 4; }                   /* Baño – ancho */
+    .cat-item:nth-child(9) { grid-column: 1 / 4; grid-row: span 1; height: 180px; } /* Más muebles – full */
+    /* Responsive */
+    @media (max-width: 900px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+      .cat-item:nth-child(1) { grid-column: 1 / 3; grid-row: span 1; }
+      .cat-item:nth-child(5) { grid-column: 1 / 3; }
+      .cat-item:nth-child(9) { grid-column: 1 / 3; height: auto; }
+    }
+    @media (max-width: 540px) {
+      .cat-grid { grid-template-columns: 1fr; grid-auto-rows: 180px; }
+      .cat-item:nth-child(1), .cat-item:nth-child(5), .cat-item:nth-child(9) { grid-column: 1; }
+    }
+
     #gallery { padding: 7rem 0; background: var(--cream-dark); }
     #gallery .sec-head { padding: 0 2rem; text-align: center; margin-bottom: 3.5rem; }
     .ornate-title { display: flex; align-items: center; justify-content: center; gap: 1rem; font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1rem, 2vw, 1.3rem); letter-spacing: .06em; text-transform: uppercase; color: var(--charcoal); }
@@ -310,8 +347,70 @@
     .rblock.in { opacity: 1; transform: translateY(0); }
 
     /* ── MOBILE ── */
+    /* ── HAMBURGER / MOBILE NAV ── */
+    .nav-ham {
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 40px; height: 40px; background: none; border: none;
+      cursor: pointer; padding: 6px; border-radius: 8px;
+      transition: background .18s;
+    }
+    .nav-ham:hover { background: rgba(53,79,34,.08); }
+    .nav-ham span {
+      display: block; width: 22px; height: 2px; background: var(--charcoal);
+      border-radius: 2px; transition: transform .3s var(--ease), opacity .2s;
+    }
+    .nav-ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile slide-down menu */
+    #mob-menu {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--cream); z-index: 99;
+      display: flex; flex-direction: column;
+      padding-top: 70px;
+      transform: translateY(-100%);
+      transition: transform .4s var(--ease);
+      overflow-y: auto;
+    }
+    #mob-menu.open { transform: translateY(0); }
+    .mob-menu-inner { padding: 1.5rem 2rem 3rem; display: flex; flex-direction: column; gap: .3rem; }
+    .mob-nav-link {
+      font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700;
+      color: var(--charcoal); text-decoration: none; padding: .9rem 0;
+      border-bottom: 1px solid var(--border-light);
+      display: block; letter-spacing: -.02em;
+      transition: color .2s, padding-left .2s;
+    }
+    .mob-nav-link:hover { color: var(--g-700); padding-left: .5rem; }
+    .mob-nav-label {
+      font-family: 'Outfit', sans-serif; font-size: .55rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--g-600);
+      margin: 1.4rem 0 .5rem;
+    }
+    .mob-sub-link {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600;
+      color: var(--muted); text-decoration: none; padding: .55rem 0;
+      display: block; transition: color .2s, padding-left .2s;
+    }
+    .mob-sub-link:hover { color: var(--g-700); padding-left: .4rem; }
+    .mob-menu-wa {
+      margin: 2rem 2rem 0;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--g-700); color: white; padding: .9rem 1.6rem;
+      border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: .72rem;
+      font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; transition: background .18s;
+    }
+    .mob-menu-wa:hover { background: var(--g-600); }
+
     @media (max-width: 1024px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 900px) { .nav-links { display: none; } }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-wa { display: none; }
+      .nav-ham { display: flex; }
+      .nav-inner { padding: .75rem 1.2rem; }
+    }
     @media (max-width: 768px) {
       #cursor, #cursor-ring { display: none; }
       #hero { grid-template-columns: 1fr; min-height: auto; }
@@ -322,17 +421,38 @@
       .gallery-grid { grid-template-columns: repeat(2,1fr); grid-auto-rows: 190px; padding: 0 1rem; }
       .g-item:first-child { grid-column: span 2; grid-row: span 1; }
       .tease-inner { grid-template-columns: 1fr; }
-      .tease-img { height: 55vw; position: relative; }
+      .tease-img { height: 60vw; position: relative; }
       .tease-text { padding: 3rem 1.5rem; }
       .reviews-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .stats-inner { grid-template-columns: repeat(3,1fr); }
+      .stat { padding: 1rem .5rem; }
+      #values-banner { padding: 3.5rem 1.2rem; }
+      .vb-cards { grid-template-columns: repeat(2,1fr); gap: 2rem; }
+      .vb-cards .vb-card:nth-child(5) { grid-column: 1 / -1; }
+      #categories { padding: 3.5rem 1rem; }
+      .cat-head { margin-bottom: 2rem; }
+      #gallery { padding: 4rem 0; }
+      .gallery-cta { padding: 0 1rem; }
+      #reviews { padding: 4rem 1.2rem; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 1rem; }
+      footer { padding: 3rem 1.2rem 0; }
+      .foot-bottom { flex-direction: column; align-items: flex-start; gap: .6rem; }
+    }
+    @media (max-width: 600px) {
       .stats-inner { grid-template-columns: 1fr; }
       .stat + .stat::before { display: none; }
+      .vb-cards { grid-template-columns: 1fr; }
+      .vb-cards .vb-card:nth-child(5) { grid-column: 1; }
+      #showroom-tease .tease-text { padding: 2.5rem 1.2rem; }
     }
     @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
       .g-item:first-child { grid-column: span 1; }
       .feat-grid { grid-template-columns: 1fr; }
+      .hb-bottom { grid-template-columns: 1fr; }
+      .hb-feat { border-right: none; border-bottom: 1px solid rgba(200,184,158,.35); }
+      .hb-feat:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -382,7 +502,22 @@
   <!-- NAV -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"></a>
+      <a href="index.html" class="nav-logo">
+        <span class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity=".18"/>
+            <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M20 4C20 4 32 12 32 22C32 28.627 26.627 34 20 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="20" y1="34" x2="20" y2="38" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M14 20C14 20 17 18 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M20 20C20 20 23 18 26 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="logo-stack">
+          <span class="logo-sup">Muebles de</span>
+          <span class="logo-main">Granero</span>
+        </span>
+      </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Inicio</a></li>
         <li><a href="showroom-granero.html">Nuestro showroom</a></li>
@@ -403,15 +538,44 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         Instagram
       </a>
+      <button class="nav-ham" id="nav-ham" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mob-menu" aria-hidden="true">
+    <div class="mob-menu-inner">
+      <a href="index.html" class="mob-nav-link">Inicio</a>
+      <a href="showroom-granero.html" class="mob-nav-link">Nuestro showroom</a>
+      <a href="wallapop.html" class="mob-nav-link">Tienda en Wallapop</a>
+      <p class="mob-nav-label">Descubre más</p>
+      <a href="taller.html" class="mob-sub-link">En nuestro taller</a>
+      <a href="fabricados.html" class="mob-sub-link">Muebles Fabricados</a>
+      <a href="entregados.html" class="mob-sub-link">Muebles Entregados</a>
+      <p class="mob-nav-label">Categorías</p>
+      <a href="mesas.html" class="mob-sub-link">Mesas</a>
+      <a href="islas-cocina.html" class="mob-sub-link">Islas de cocina</a>
+      <a href="mostradores.html" class="mob-sub-link">Mostradores</a>
+      <a href="mesas-centro.html" class="mob-sub-link">Mesas de centro</a>
+      <a href="bano.html" class="mob-sub-link">Baño</a>
+      <a href="puertas.html" class="mob-sub-link">Puertas</a>
+      <a href="comercial.html" class="mob-sub-link">Comercial</a>
+      <a href="decoracion.html" class="mob-sub-link">Decoración</a>
+    </div>
+    <a href="https://www.instagram.com/muebles_de_granero_/" class="mob-menu-wa" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+  </div>
 
   <!-- HERO BANNER -->
   <section id="hero">
     <div class="hb-frame">
     <div class="hb-wrap">
       <div class="hb-bg">
-        <img src="hero-v3.png" onerror="this.src='hero-bg.jpg'" alt="" aria-hidden="true" loading="eager">
+        <img src="hero-v4.jpg" onerror="this.src='hero-bg.jpg'" alt="" aria-hidden="true" loading="eager">
         <div class="hb-overlay"></div>
       </div>
 
@@ -553,6 +717,113 @@
           <p class="vb-card-desc">Cada marca y textura hace tu mueble irrepetible.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section id="categories">
+    <div class="cat-head rblock">
+      <div class="cat-eyebrow">
+        <svg width="16" height="2" viewBox="0 0 16 2"><rect width="16" height="2" fill="currentColor"/></svg>
+        Lo que fabricamos
+        <svg width="16" height="2" viewBox="0 0 16 2"><rect width="16" height="2" fill="currentColor"/></svg>
+      </div>
+      <h2 class="cat-h2">Nuestras <em>categorías</em></h2>
+      <p class="cat-sub">Muebles a medida en madera maciza — dinos qué necesitas y lo hacemos.</p>
+    </div>
+    <div class="cat-grid">
+
+      <!-- 1. Mesas — GRANDE (2×2) -->
+      <a href="mesas.html" class="cat-item large"
+         style="--cat-color: linear-gradient(145deg,#3D2A0E,#6B4820); --cat-img: url('cat-mesas.jpg')">
+        <div class="cat-badge">Más vendido</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 2. Mesas altas / islas de cocina -->
+      <a href="islas-cocina.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#2A1F10,#4A3520); --cat-img: url('cat-islas.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas altas y islas de cocina</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 3. Mostradores y barras de bar -->
+      <a href="mostradores.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#1E1608,#3A2C14); --cat-img: url('mostradores-hero.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mostradores y barras</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 4. Mesas de centro -->
+      <a href="mesas-centro.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#4A3010,#7A5428); --cat-img: url('cat-centro.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas de centro</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 5. Muebles de baño — ANCHO (2 cols) -->
+      <a href="bano.html" class="cat-item wide"
+         style="--cat-color: linear-gradient(145deg,#1A2E10,#2E4A1A); --cat-img: url('cat-bano.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Muebles de baño</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 6. Puertas de Granero -->
+      <a href="puertas.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#3C2E1C,#5C4830); --cat-img: url('cat-puertas.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Puertas</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 7. Muebles comerciales -->
+      <a href="comercial.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#28200E,#443820); --cat-img: url('cat-comercial.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Muebles comerciales</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 8. Decoración con la naturaleza -->
+      <a href="decoracion.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#1C3010,#304A20); --cat-img: url('cat-decoracion.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Decoración natural</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 9. Más muebles — FULL WIDTH -->
+      <a href="mas-muebles.html" class="cat-item"
+         style="--cat-color: linear-gradient(135deg,#0F1E08,#1A2E10,#233D15); --cat-img: url('cat-mas.jpg'); grid-column: 1 / 4; height: 180px;">
+        <div class="cat-overlay" style="background: linear-gradient(to right, rgba(10,8,4,.85) 0%, rgba(10,8,4,.4) 100%);"></div>
+        <div class="cat-body" style="padding: 1.6rem 2rem; align-items: center;">
+          <span class="cat-name" style="font-size:1.3rem;">¿No encuentras lo que buscas? <em style="font-style:italic;color:var(--g-400);font-weight:400;">Cuéntanos qué necesitas</em></span>
+          <span class="cat-arrow" style="opacity:1;transform:none;width:44px;height:44px;background:var(--g-600);border:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
     </div>
   </section>
 
@@ -920,6 +1191,38 @@
       a.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
     });
   });
+
+  /* HAMBURGER MENU */
+  (function(){
+    const ham = document.getElementById('nav-ham');
+    const mob = document.getElementById('mob-menu');
+    const nav = document.getElementById('nav');
+    if (!ham || !mob) return;
+    function openMenu() {
+      ham.classList.add('open');
+      mob.classList.add('open');
+      mob.setAttribute('aria-hidden','false');
+      ham.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
+      // align top of mobile menu with bottom of nav
+      mob.style.paddingTop = (nav.offsetHeight) + 'px';
+    }
+    function closeMenu() {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+      mob.setAttribute('aria-hidden','true');
+      ham.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    }
+    ham.addEventListener('click', e => {
+      e.stopPropagation();
+      mob.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    // close on link click
+    mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    // close on resize to desktop
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
+  })();
   </script>
 </body>
 </html>
