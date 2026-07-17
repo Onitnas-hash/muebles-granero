@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -37,26 +37,6 @@
     #scroll-bar {
       position: fixed; top: 0; left: 0; height: 2px; width: 0%;
       background: var(--g-600); z-index: 8999; transition: width 0.08s linear;
-    }
-
-    /* ── CURSOR ── */
-    #cursor {
-      position: fixed; width: 10px; height: 10px;
-      background: var(--g-700); border-radius: 50%;
-      pointer-events: none; z-index: 8997;
-      left: -20px; top: -20px;
-      transform: translate(-50%,-50%);
-      mix-blend-mode: multiply;
-      transition: width .2s var(--ease), height .2s var(--ease), transform .2s var(--ease);
-    }
-    #cursor-ring {
-      position: fixed; width: 36px; height: 36px;
-      border: 1.5px solid var(--g-600); border-radius: 50%;
-      pointer-events: none; z-index: 8996;
-      left: -20px; top: -20px;
-      transform: translate(-50%,-50%);
-      opacity: .6;
-      transition: width .3s var(--ease), height .3s var(--ease), border-color .2s, opacity .2s;
     }
 
     /* ── CURTAIN LOADER ── */
@@ -180,7 +160,7 @@
     #values-banner { background: var(--cream); padding: 5.5rem 2rem; border-top: 1px solid var(--border-light); }
     .vb-inner { max-width: 1200px; margin: 0 auto; }
     .vb-header { text-align: center; margin-bottom: 3.5rem; }
-    .vb-title { display: inline-flex; align-items: center; gap: 1rem; font-family: 'Outfit', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--charcoal); margin-bottom: .9rem; }
+    .vb-title { display: inline-flex; align-items: center; gap: 1rem; font-family: 'Playfair Display', serif; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--charcoal); margin-bottom: .9rem; }
     .vb-divider { display: flex; align-items: center; justify-content: center; gap: .8rem; }
     .vb-line { width: 3rem; height: 1px; background: var(--divider); }
     .vb-heart { color: var(--g-700); font-size: .85rem; }
@@ -266,7 +246,7 @@
 
     /* ── SHOWROOM TEASER ── */
     #showroom-tease { background: var(--g-900); padding: 0; overflow: hidden; }
-    .tease-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
+    .tease-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 280px; }
     .tease-img { position: relative; overflow: hidden; }
     .tease-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .6s var(--ease); }
     .tease-img:hover img { transform: scale(1.04); }
@@ -470,8 +450,6 @@
   <div id="scroll-bar"></div>
 
   <!-- CURSOR -->
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
 
   <!-- ANNOUNCE BAR -->
   <div id="announce" aria-hidden="true">
@@ -503,16 +481,6 @@
   <nav id="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <span class="logo-mark">
-          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity=".18"/>
-            <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M20 4C20 4 32 12 32 22C32 28.627 26.627 34 20 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="20" y1="34" x2="20" y2="38" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M14 20C14 20 17 18 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M20 20C20 20 23 18 26 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </span>
         <span class="logo-stack">
           <span class="logo-sup">Muebles de</span>
           <span class="logo-main">Granero</span>
@@ -528,9 +496,8 @@
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="nav-drop-menu">
-            <a href="taller.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">En nuestro taller</span></a>
+            <a href="taller.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">Nuestro taller</span></a>
             <a href="fabricados.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">Muebles Fabricados</span></a>
-            <a href="entregados.html"><span class="di-arrow-clip"><span class="di-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></span><span class="di-label">Muebles Entregados</span></a>
           </div>
         </li>
       </ul>
@@ -551,9 +518,8 @@
       <a href="showroom-granero.html" class="mob-nav-link">Nuestro showroom</a>
       <a href="wallapop.html" class="mob-nav-link">Tienda en Wallapop</a>
       <p class="mob-nav-label">Descubre más</p>
-      <a href="taller.html" class="mob-sub-link">En nuestro taller</a>
+      <a href="taller.html" class="mob-sub-link">Nuestro taller</a>
       <a href="fabricados.html" class="mob-sub-link">Muebles Fabricados</a>
-      <a href="entregados.html" class="mob-sub-link">Muebles Entregados</a>
       <p class="mob-nav-label">Categorías</p>
       <a href="mesas.html" class="mob-sub-link">Mesas</a>
       <a href="islas-cocina.html" class="mob-sub-link">Islas de cocina</a>
@@ -588,7 +554,7 @@
           </div>
           <div class="hb-feat-body">
             <div class="hb-feat-title">Transporte a toda la Península</div>
-            <p class="hb-feat-desc">Entregamos tu mueble donde lo necesites.</p>
+            <p class="hb-feat-desc">Consultar condiciones.</p>
           </div>
         </div>
         <div class="hb-feat rblock" style="transition-delay:.07s">
@@ -597,7 +563,7 @@
           </div>
           <div class="hb-feat-body">
             <div class="hb-feat-title">Recogida en nuestro taller de Mataró</div>
-            <p class="hb-feat-desc">Ahorra en transporte y ven a recogerlo cuando quieras.</p>
+            <p class="hb-feat-desc">Ven a recogerlo a nuestro taller</p>
           </div>
         </div>
         <div class="hb-feat rblock" style="transition-delay:.14s">
@@ -633,7 +599,155 @@
     </div>
   </div>
 
-  <!-- VALUES BANNER -->
+  <!-- CATEGORÍAS -->
+  <section id="categories">
+    <div class="cat-head rblock">
+      <h2 class="cat-h2">Nuestras <em>categorías</em></h2>
+
+    </div>
+    <div class="cat-grid">
+
+      <!-- 1. Mesas — GRANDE (2×2) -->
+      <a href="mesas.html" class="cat-item large"
+         style="--cat-color: linear-gradient(145deg,#3D2A0E,#6B4820); --cat-img: url('cat-mesas.jpg')">
+        <div class="cat-badge">Más vendido</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 2. Mesas altas / islas de cocina -->
+      <a href="islas-cocina.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#2A1F10,#4A3520); --cat-img: url('cat-islas.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas altas y islas de cocina</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 3. Mostradores y barras de bar -->
+      <a href="mostradores.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#1E1608,#3A2C14); --cat-img: url('mostradores-hero.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mostradores y barras</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 4. Mesas de centro -->
+      <a href="mesas-centro.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#4A3010,#7A5428); --cat-img: url('cat-centro.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Mesas de centro</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 5. Muebles de baño — ANCHO (2 cols) -->
+      <a href="bano.html" class="cat-item wide"
+         style="--cat-color: linear-gradient(145deg,#1A2E10,#2E4A1A); --cat-img: url('cat-bano.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Muebles de baño</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 6. Puertas de Granero -->
+      <a href="puertas.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#3C2E1C,#5C4830); --cat-img: url('cat-puertas.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Puertas</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 7. Muebles comerciales -->
+      <a href="comercial.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#28200E,#443820); --cat-img: url('cat-comercial.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Muebles comerciales</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+      <!-- 8. Decoración con la naturaleza -->
+      <a href="decoracion.html" class="cat-item"
+         style="--cat-color: linear-gradient(145deg,#1C3010,#304A20); --cat-img: url('cat-decoracion.jpg')">
+        <div class="cat-overlay"></div>
+        <div class="cat-body">
+          <span class="cat-name">Decoración natural</span>
+          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="sec-head rblock">
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:700;letter-spacing:-.02em;color:var(--charcoal);text-align:center">Algunos de nuestros <em style="font-style:italic;font-weight:400;color:var(--g-700)">muebles fabricados</em></h2>
+      <div class="title-diamond">
+        <span class="dm-line"></span><span class="dm-dot">◆</span><span class="dm-line"></span>
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="g-item" data-idx="0">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbipc7ij8zrzpu80rf5d1frm8u1kzgekzmloc3s8.jpeg" alt="Mueble fabricado 1" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="1">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados2-qwmbir7vw7bkf7n3x1koackcydzkgz6x2ualk89bfs.jpeg" alt="Mueble fabricado 2" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="2">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados4-qwmbis5q31cuqtlqrjzauubtjruxooaneyy31i7x9k.jpeg" alt="Mueble fabricado 3" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="3">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados5-qwmbit3k9ve52fkdm2dxfc3a55qawdedr3lkis6j3c.jpeg" alt="Mueble fabricado 4" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="4">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados7-qwmbiu1egpffe1j0gksjztuqqjlo42i438920254x4.jpeg" alt="Mueble fabricado 5" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="5">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados8-qwmbiuz8njgppnhnb376kbm7bxh1brlufcwjhc3qqw.jpeg" alt="Mueble fabricado 6" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="6">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados12-qwmbiwux17jacvex040fpb54ip7rr5tb3m7ifw0yeg.jpeg" alt="Mueble fabricado 7" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="7">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados13-qwmbixsr81kkohdjumf29swl4334yux1fquzx5zk88.jpeg" alt="Mueble fabricado 8" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="g-item" data-idx="8">
+        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados14-qwmbiyqlevlv03c6p4touao1pgyi6k0rrvihefy620.jpeg" alt="Mueble fabricado 9" loading="lazy">
+        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+    </div>
+
+    <div class="gallery-cta rblock">
+      <a href="fabricados.html" class="btn-outline">
+        Ver todos los muebles fabricados
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+<!-- VALUES BANNER -->
   <section id="values-banner">
     <div class="vb-inner">
       <div class="vb-header rblock">
@@ -720,183 +834,6 @@
     </div>
   </section>
 
-  <!-- CATEGORÍAS -->
-  <section id="categories">
-    <div class="cat-head rblock">
-      <div class="cat-eyebrow">
-        <svg width="16" height="2" viewBox="0 0 16 2"><rect width="16" height="2" fill="currentColor"/></svg>
-        Lo que fabricamos
-        <svg width="16" height="2" viewBox="0 0 16 2"><rect width="16" height="2" fill="currentColor"/></svg>
-      </div>
-      <h2 class="cat-h2">Nuestras <em>categorías</em></h2>
-      <p class="cat-sub">Muebles a medida en madera maciza — dinos qué necesitas y lo hacemos.</p>
-    </div>
-    <div class="cat-grid">
-
-      <!-- 1. Mesas — GRANDE (2×2) -->
-      <a href="mesas.html" class="cat-item large"
-         style="--cat-color: linear-gradient(145deg,#3D2A0E,#6B4820); --cat-img: url('cat-mesas.jpg')">
-        <div class="cat-badge">Más vendido</div>
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Mesas</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 2. Mesas altas / islas de cocina -->
-      <a href="islas-cocina.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#2A1F10,#4A3520); --cat-img: url('cat-islas.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Mesas altas y islas de cocina</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 3. Mostradores y barras de bar -->
-      <a href="mostradores.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#1E1608,#3A2C14); --cat-img: url('mostradores-hero.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Mostradores y barras</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 4. Mesas de centro -->
-      <a href="mesas-centro.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#4A3010,#7A5428); --cat-img: url('cat-centro.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Mesas de centro</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 5. Muebles de baño — ANCHO (2 cols) -->
-      <a href="bano.html" class="cat-item wide"
-         style="--cat-color: linear-gradient(145deg,#1A2E10,#2E4A1A); --cat-img: url('cat-bano.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Muebles de baño</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 6. Puertas de Granero -->
-      <a href="puertas.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#3C2E1C,#5C4830); --cat-img: url('cat-puertas.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Puertas</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 7. Muebles comerciales -->
-      <a href="comercial.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#28200E,#443820); --cat-img: url('cat-comercial.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Muebles comerciales</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 8. Decoración con la naturaleza -->
-      <a href="decoracion.html" class="cat-item"
-         style="--cat-color: linear-gradient(145deg,#1C3010,#304A20); --cat-img: url('cat-decoracion.jpg')">
-        <div class="cat-overlay"></div>
-        <div class="cat-body">
-          <span class="cat-name">Decoración natural</span>
-          <span class="cat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-      <!-- 9. Más muebles — FULL WIDTH -->
-      <a href="mas-muebles.html" class="cat-item"
-         style="--cat-color: linear-gradient(135deg,#0F1E08,#1A2E10,#233D15); --cat-img: url('cat-mas.jpg'); grid-column: 1 / 4; height: 180px;">
-        <div class="cat-overlay" style="background: linear-gradient(to right, rgba(10,8,4,.85) 0%, rgba(10,8,4,.4) 100%);"></div>
-        <div class="cat-body" style="padding: 1.6rem 2rem; align-items: center;">
-          <span class="cat-name" style="font-size:1.3rem;">¿No encuentras lo que buscas? <em style="font-style:italic;color:var(--g-400);font-weight:400;">Cuéntanos qué necesitas</em></span>
-          <span class="cat-arrow" style="opacity:1;transform:none;width:44px;height:44px;background:var(--g-600);border:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="sec-head rblock">
-      <div class="ornate-title">
-        <svg class="orn-leaf" width="32" height="20" viewBox="0 0 40 24" fill="none" aria-hidden="true">
-          <path d="M2 12 C8 4,20 2,32 8 M2 12 C8 20,20 22,32 16" stroke="#4A6B2C" stroke-width="1.2" fill="none"/>
-          <path d="M14 6 C16 10,16 14,14 18" stroke="#4A6B2C" stroke-width=".8" fill="none"/>
-          <path d="M22 4 C24 9,24 15,22 20" stroke="#4A6B2C" stroke-width=".8" fill="none"/>
-          <circle cx="32" cy="12" r="1.5" fill="#4A6B2C"/>
-        </svg>
-        Muebles que hemos fabricado
-        <svg class="orn-leaf" width="32" height="20" viewBox="0 0 40 24" fill="none" style="transform:scaleX(-1)" aria-hidden="true">
-          <path d="M2 12 C8 4,20 2,32 8 M2 12 C8 20,20 22,32 16" stroke="#4A6B2C" stroke-width="1.2" fill="none"/>
-          <path d="M14 6 C16 10,16 14,14 18" stroke="#4A6B2C" stroke-width=".8" fill="none"/>
-          <path d="M22 4 C24 9,24 15,22 20" stroke="#4A6B2C" stroke-width=".8" fill="none"/>
-          <circle cx="32" cy="12" r="1.5" fill="#4A6B2C"/>
-        </svg>
-      </div>
-      <div class="title-diamond">
-        <span class="dm-line"></span><span class="dm-dot">◆</span><span class="dm-line"></span>
-      </div>
-    </div>
-
-    <div class="gallery-grid" id="gallery-grid">
-      <div class="g-item" data-idx="0">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbipc7ij8zrzpu80rf5d1frm8u1kzgekzmloc3s8.jpeg" alt="Mueble fabricado 1" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="1">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados2-qwmbir7vw7bkf7n3x1koackcydzkgz6x2ualk89bfs.jpeg" alt="Mueble fabricado 2" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="2">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados4-qwmbis5q31cuqtlqrjzauubtjruxooaneyy31i7x9k.jpeg" alt="Mueble fabricado 3" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="3">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados5-qwmbit3k9ve52fkdm2dxfc3a55qawdedr3lkis6j3c.jpeg" alt="Mueble fabricado 4" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="4">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados7-qwmbiu1egpffe1j0gksjztuqqjlo42i438920254x4.jpeg" alt="Mueble fabricado 5" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="5">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados8-qwmbiuz8njgppnhnb376kbm7bxh1brlufcwjhc3qqw.jpeg" alt="Mueble fabricado 6" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="6">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados12-qwmbiwux17jacvex040fpb54ip7rr5tb3m7ifw0yeg.jpeg" alt="Mueble fabricado 7" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="7">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados13-qwmbixsr81kkohdjumf29swl4334yux1fquzx5zk88.jpeg" alt="Mueble fabricado 8" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-      <div class="g-item" data-idx="8">
-        <img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados14-qwmbiyqlevlv03c6p4touao1pgyi6k0rrvihefy620.jpeg" alt="Mueble fabricado 9" loading="lazy">
-        <div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-      </div>
-    </div>
-
-    <div class="gallery-cta rblock">
-      <a href="fabricados.html" class="btn-outline">
-        Ver todos los muebles fabricados
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </section>
-
   <!-- LIGHTBOX -->
   <div id="lightbox" role="dialog" aria-modal="true">
     <button id="lb-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -918,8 +855,8 @@
       </div>
       <div class="tease-text rblock">
         <div class="tease-overline">Visítanos</div>
-        <h2 class="tease-h2">Un showroom de <em>250m²</em><br>donde tocar los muebles</h2>
-        <p class="tease-desc">Tenemos toda nuestra colección expuesta. Ven sin cita o pide una para que podamos atenderte mejor.</p>
+        <h2 class="tease-h2">Un showroom de <em>250m²</em></h2>
+
         <a href="showroom-granero.html" class="btn-light">
           Ver el showroom
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -998,8 +935,9 @@
         </a>
         <p class="foot-desc">Especializados desde 2015 en muebles rústicos a medida con madera maciza.</p>
         <div class="foot-contacts">
-          <a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a>
+
           <a href="tel:651585164">651 585 164</a>
+          <a href="tel:692899691">692 899 691</a>
         </div>
       </div>
       <div class="foot-col">
@@ -1009,15 +947,15 @@
           <li><a href="showroom-granero.html">Nuestro showroom</a></li>
           <li><a href="wallapop.html">Tienda wallapop</a></li>
           <li class="foot-sub-title">Descubre más</li>
-          <li class="foot-sub-item"><a href="taller.html">En nuestro taller</a></li>
+          <li class="foot-sub-item"><a href="taller.html">Nuestro taller</a></li>
           <li class="foot-sub-item"><a href="fabricados.html">Muebles Fabricados</a></li>
-          <li class="foot-sub-item"><a href="entregados.html">Muebles Entregados</a></li>
+
         </ul>
       </div>
       <div class="foot-col">
         <h4>Contacto directo</h4>
         <ul>
-          <li><a href="mailto:mueblesdegranero@gmail.com">mueblesdegranero@gmail.com</a></li>
+          <li><a href="tel:692899691">692 899 691</a></li>
           <li><a href="tel:651585164">651 585 164</a></li>
           <li><a href="https://wa.me/34651585164" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
@@ -1086,28 +1024,6 @@
     const d = document.documentElement;
     sb.style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
   }, { passive: true });
-
-  /* CURSOR */
-  if (!isTouch) {
-    const dot = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-    (function loop(){
-      dot.style.left=mx+'px'; dot.style.top=my+'px';
-      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-      ring.style.left=rx+'px'; ring.style.top=ry+'px';
-      requestAnimationFrame(loop);
-    })();
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', () => { dot.style.transform='translate(-50%,-50%) scale(1.5)'; ring.style.width='50px'; ring.style.height='50px'; ring.style.opacity='.4'; });
-      el.addEventListener('mouseleave', () => { dot.style.transform='translate(-50%,-50%) scale(1)'; ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='.6'; });
-    });
-    document.querySelectorAll('.g-item').forEach(el => {
-      el.addEventListener('mouseenter', () => { ring.style.width='62px'; ring.style.height='62px'; ring.style.borderColor='rgba(248,244,237,.65)'; ring.style.opacity='.8'; });
-      el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='var(--g-600)'; ring.style.opacity='.6'; });
-    });
-  }
 
   /* HERO PARALLAX */
   if (!isTouch) {
