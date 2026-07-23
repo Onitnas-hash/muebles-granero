@@ -122,6 +122,17 @@
     /* RBLOCK */
     .rblock{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .75s var(--ease)}
     .rblock.in{opacity:1;transform:translateY(0)}
+    /* LIGHTBOX */
+    #lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
+    #lb.open{display:flex}
+    #lb img{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 60px rgba(0,0,0,.6)}
+    #lb-close{position:absolute;top:1.2rem;right:1.5rem;color:white;font-size:2rem;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s}
+    #lb-close:hover{opacity:1}
+    /* DESCRIPCION CATEGORIA */
+    #cat-desc { background: var(--cream); padding: 2.5rem 2rem 0; }
+    .cat-desc-inner { max-width: 860px; margin: 0 auto; }
+    .cat-desc-inner p { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.1rem; }
+    .cat-desc-inner p:last-child { margin-bottom: 0; color: var(--charcoal); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -131,7 +142,7 @@
   <!-- NAV -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Muebles de <em>Granero</em></a>
+      
       <a href="index.html" class="nav-home">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
         Inicio
@@ -149,7 +160,6 @@
               <a href="puertas.html"><span class="di-dot"></span>Puertas de Granero</a>
               <a href="comercial.html"><span class="di-dot"></span>Muebles comerciales</a>
               <a href="decoracion.html"><span class="di-dot"></span>Decoración con la naturaleza</a>
-              <a href="mas-muebles.html"><span class="di-dot"></span>Más muebles</a>
         </div>
       </div>
       <a href="https://wa.me/34651585164?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20las%20Mesas" class="nav-wa" target="_blank" rel="noopener">
@@ -172,7 +182,6 @@
       <a href="puertas.html" class="mob-sub-link">Puertas</a>
       <a href="comercial.html" class="mob-sub-link">Comercial</a>
       <a href="decoracion.html" class="mob-sub-link">Decoracion</a>
-      <a href="mas-muebles.html" class="mob-sub-link">Mas muebles</a>
     </div>
     <a href="https://wa.me/34651585164" class="mob-menu-wa" target="_blank" rel="noopener">WhatsApp</a>
   </div>
@@ -194,7 +203,6 @@
       <p class="hero-desc">Mesas de comedor, de cocina y de exterior fabricadas a medida en madera maciza.</p>
     </div>
   </section>
-
   <!-- GALERÍA -->
   <section id="cat-gallery">
     <div class="gal-inner">
@@ -204,7 +212,11 @@
           Ejemplos reales
         </div>
         <h2 class="gal-title">Nuestro trabajo en <em>mesas</em></h2>
-        <p class="gal-sub">Mesas de comedor, cocina y exterior fabricadas a medida. Escríbenos por WhatsApp para ver más ejemplos y pedir presupuesto.</p>
+      <div class="cat-desc-inner" style="max-width:none;margin-top:1.2rem"><p>Con más de 30 modelos diferentes y más de 800 mesas fabricadas desde 2015, en mueblesdegranero.com fabricamos mesas de aspecto rústico, provenzal y como se suele decir: «La típica mesa de cocina que tenía mi yaya». Gracias a nuestras múltiples opciones de acabados encajan sea cual sea el ambiente de tu casa o negocio.</p>
+      <p>Para interior o exterior, todas nuestras mesas son fabricadas en madera natural, de forma artesanal y con acabados imperfectos respetando siempre la naturaleza de nuestra madera. Dicha naturaleza, compuesta de vetas, nudos y grietas, crea muebles únicos que no dejan indiferente a nadie.</p>
+      <p>Con patas de viga ancha o fina, rectas o cruzadas, sobres con o sin voladizo, en madera de 2, 4 o 6 cm de grosor, color nogal, roble, etc… sea el modelo que sea, tu hogar o negocio siempre se ha merecido una de nuestras mesas de granero.</p>
+      <p>¡Desde 2015 más de 1800 particulares y negocios disfrutan de nuestros muebles de granero!</p>
+      <p>¡Recuerda visitar nuestra tienda de Wallapop para ver todos nuestros productos!</p></div>
       </div>
       <div class="gal-grid" style="grid-template-columns:1fr;max-width:700px;margin:0 auto">
         <div class="gal-item rblock"><img src="mesas-gallery-1.jpg" alt="Mesa rústica de madera maciza" loading="lazy"></div>
@@ -220,37 +232,33 @@
         <h2 class="oc-title">Otras <em>categorías</em></h2>
       </div>
       <div class="oc-grid">
-        <a href="islas-cocina.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#2A1F10,4A3520)">
+        <a href="islas-cocina.html" class="oc-item rblock" style="--cat-c:url('cat-islas.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Islas de cocina</div>
         </a>
-        <a href="mostradores.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#1E1608,3A2C14)">
+        <a href="mostradores.html" class="oc-item rblock" style="--cat-c:url('cat-mostradores.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Mostradores y barras de bar</div>
         </a>
-        <a href="mesas-centro.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#4A3010,7A5428)">
+        <a href="mesas-centro.html" class="oc-item rblock" style="--cat-c:url('cat-centro.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Mesas de centro</div>
         </a>
-        <a href="bano.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#1A2E10,2E4A1A)">
+        <a href="bano.html" class="oc-item rblock" style="--cat-c:url('cat-bano.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Muebles de baño</div>
         </a>
-        <a href="puertas.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#3C2E1C,5C4830)">
+        <a href="puertas.html" class="oc-item rblock" style="--cat-c:url('cat-puertas.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Puertas de Granero</div>
         </a>
-        <a href="comercial.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#28200E,443820)">
+        <a href="comercial.html" class="oc-item rblock" style="--cat-c:url('cat-comercial.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Muebles comerciales</div>
         </a>
-        <a href="decoracion.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#1C3010,304A20)">
+        <a href="decoracion.html" class="oc-item rblock" style="--cat-c:url('cat-decoracion.jpg')">
           <div class="oc-overlay"></div>
           <div class="oc-name">Decoración con la naturaleza</div>
-        </a>
-        <a href="mas-muebles.html" class="oc-item rblock" style="--cat-c:linear-gradient(145deg,#0F1E08,233D15)">
-          <div class="oc-overlay"></div>
-          <div class="oc-name">Más muebles</div>
         </a>
       </div>
     </div>
@@ -284,6 +292,11 @@
     <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.017.5 3.92 1.38 5.594L0 24l6.545-1.337C8.176 23.54 10.05 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.636-.51-5.13-1.396l-.368-.217-3.815.78.818-3.723-.241-.382C2.532 15.54 2 13.82 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
   </a>
 
+  <!-- LIGHTBOX -->
+  <div id="lb" role="dialog" aria-modal="true">
+    <span id="lb-close" aria-label="Cerrar">&times;</span>
+    <img id="lb-img" src="" alt="">
+  </div>
   <script>
     // Nav scroll
     const nav = document.getElementById('nav');
@@ -322,7 +335,19 @@
     ham.addEventListener('click',e=>{e.stopPropagation();mob.classList.contains('open')?closeM():openM();});
     mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeM));
     window.addEventListener('resize',()=>{if(window.innerWidth>900)closeM();});
-  })();  </script>
+  })();    /* LIGHTBOX */
+    (function(){
+      const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbClose=document.getElementById('lb-close');
+      document.querySelectorAll('.gal-item img').forEach(img=>{
+        img.style.cursor='zoom-in';
+        img.addEventListener('click',function(){lbImg.src=this.src;lbImg.alt=this.alt;lb.classList.add('open');document.body.style.overflow='hidden'});
+      });
+      function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
+      lb.addEventListener('click',function(e){if(e.target===lb||e.target===lbImg)closeLb()});
+      lbClose.addEventListener('click',closeLb);
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+    })();
+  </script>
 </body>
 </html>
 
