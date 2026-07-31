@@ -79,9 +79,17 @@
 
     /* PAGE HERO */
     #page-hero { position:relative; padding:8rem 2rem 7rem; border-bottom:1px solid var(--border-light); overflow:hidden; background:#1a1208; }
-    #page-hero::before { content:''; position:absolute; inset:0; background:url('fabricados-nueva-4.jpg') center/cover no-repeat; opacity:.45; }
-    #page-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, rgba(15,10,4,.75) 40%, rgba(15,10,4,.25)); }
+    #page-hero::before { content:''; position:absolute; inset:0; background:url('fabricados-nueva-4.jpg') center/cover no-repeat; opacity:.85; }
+    #page-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, rgba(10,6,2,.35) 35%, rgba(10,6,2,.05)); }
     .page-hero-inner { max-width:1280px; margin:0 auto; position:relative; z-index:1; }
+    #page-hero .breadcrumb { color:rgba(255,255,255,.75); }
+    #page-hero .breadcrumb a { color:rgba(255,255,255,.75); }
+    #page-hero .breadcrumb a:hover { color:#fff; }
+    #page-hero .breadcrumb span { color:rgba(255,255,255,.5); }
+    #page-hero .page-overline { color:#a8c878; }
+    #page-hero .page-h1 { color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.4); }
+    #page-hero .page-h1 em { color:#c8e090; }
+    #page-hero .page-desc { color:rgba(255,255,255,.88); text-shadow:0 1px 6px rgba(0,0,0,.35); }
     .breadcrumb { display:flex; align-items:center; gap:.5rem; font-family:'Outfit',sans-serif; font-size:.62rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); margin-bottom:2rem; }
     .breadcrumb a { color:var(--faint); text-decoration:none; transition:color .15s; }
     .breadcrumb a:hover { color:var(--g-600); }
