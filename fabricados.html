@@ -78,8 +78,10 @@
     .nav-wa:hover { background:var(--g-600); transform:translateY(-1px); }
 
     /* PAGE HERO */
-    #page-hero { background:var(--cream-dark); padding:6rem 2rem 5rem; border-bottom:1px solid var(--border-light); }
-    .page-hero-inner { max-width:1280px; margin:0 auto; }
+    #page-hero { position:relative; padding:8rem 2rem 7rem; border-bottom:1px solid var(--border-light); overflow:hidden; background:#1a1208; }
+    #page-hero::before { content:''; position:absolute; inset:0; background:url('fabricados-nueva-4.jpg') center/cover no-repeat; opacity:.45; }
+    #page-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, rgba(15,10,4,.75) 40%, rgba(15,10,4,.25)); }
+    .page-hero-inner { max-width:1280px; margin:0 auto; position:relative; z-index:1; }
     .breadcrumb { display:flex; align-items:center; gap:.5rem; font-family:'Outfit',sans-serif; font-size:.62rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); margin-bottom:2rem; }
     .breadcrumb a { color:var(--faint); text-decoration:none; transition:color .15s; }
     .breadcrumb a:hover { color:var(--g-600); }
@@ -92,7 +94,7 @@
     /* GALLERY */
     #gallery { padding:5rem 0; background:var(--cream); }
     .gallery-grid { max-width:1280px; margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:260px; gap:.7rem; }
-    .g-item { position:relative; overflow:hidden; border-radius:5px; background:var(--sand); cursor:pointer; opacity:0; transform:translateY(36px); }
+    .g-item { position:relative; overflow:hidden; border-radius:5px; background:var(--sand); cursor:pointer; }
     .g-item.in { opacity:1; transform:translateY(0); }
     .g-item:first-child { grid-column:span 2; grid-row:span 2; }
     .g-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease); }
@@ -220,6 +222,23 @@
 
   <section id="gallery">
     <div class="gallery-grid" id="gallery-grid">
+      <div class="g-item" data-idx="30" style="transition-delay:0.07s"><img src="fabricados-nueva-1.jpg" alt="Mesa r&uacute;stica de madera con caj&oacute;n"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="31" style="transition-delay:0.14s"><img src="fabricados-nueva-2.jpg" alt="Isla de cocina r&uacute;stica con taburetes"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="32" style="transition-delay:0.21s"><img src="fabricados-nueva-3.jpg" alt="Mueble de TV de madera envejecida"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="33" style="transition-delay:0.28s"><img src="fabricados-nueva-4.jpg" alt="Mesa de comedor exterior con velas"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="34" style="transition-delay:0.35s"><img src="fabricados-nueva-5.jpg" alt="Mesa de comedor con patas negras"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="35" style="transition-delay:0.42s"><img src="fabricados-nueva-6.jpg" alt="Barra de bar exterior junto a piscina"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="36" style="transition-delay:0.07s"><img src="fabricados-nueva-7.jpg" alt="Mesa de centro de madera maciza clara"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="37" style="transition-delay:0.14s"><img src="fabricados-nueva-8.jpg" alt="Mueble aparador de madera r&uacute;stico"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="38" style="transition-delay:0.21s"><img src="fabricados-nueva-9.jpg" alt="Estanter&iacute;a de madera maciza con libros"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="39" style="transition-delay:0.28s"><img src="fabricados-nueva-10.jpg" alt="Mesa auxiliar r&uacute;stica ante puertas de granero"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="40" style="transition-delay:0.35s"><img src="fabricados-nueva-11.jpg" alt="Puerta de granero corredera en sal&oacute;n moderno"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="41" style="transition-delay:0.42s"><img src="fabricados-nueva-12.jpg" alt="Mesa alta de madera para bodega"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="42" style="transition-delay:0.07s"><img src="fabricados-nueva-13.jpg" alt="Mesa de comedor con banco y platos negros"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="43" style="transition-delay:0.14s"><img src="fabricados-nueva-14.jpg" alt="Mesa de madera con patas negras en showroom"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="44" style="transition-delay:0.21s"><img src="fabricados-nueva-15.jpg" alt="Mesa de madera maciza fabricada en taller"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="45" style="transition-delay:0.28s"><img src="fabricados-nueva-16.jpg" alt="Mostrador de tienda con iluminaci&oacute;n"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        <div class="g-item" data-idx="46" style="transition-delay:0.35s"><img src="fabricados-nueva-17.jpg" alt="Barra Nishiki de madera exterior"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       <div class="g-item" data-idx="0"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbipc7ij8zrzpu80rf5d1frm8u1kzgekzmloc3s8.jpeg" alt="Fabricado 1" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="1"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/muebles-AA-qwmbyolfp54h5ci8wxf3jbvjbfhgwcf6lo8sb0n608.jpeg" alt="Fabricado 2" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="2"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/mueblesa-qwmbypj9vz5rgygvrftq3tmzwtcu41iwxsw9salru0.jpeg" alt="Fabricado 3" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
@@ -250,6 +269,7 @@
       <div class="g-item" data-idx="27"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.50-6-1-r72dkfes4fns2c01c9kgbb5od6wqp508ur08ygdyy0.jpeg" alt="Muebles de Granero 27" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="28"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.50-7-r72dkgcmb9p2dxyo6rz2vsx4yks3wu3z6vnqfqckrs.jpeg" alt="Muebles de Granero 28" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="g-item" data-idx="29"><img src="https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-09-at-10.44.51-1-1-r72dkhagi3qcpjxb1adpgaoljynh4j7pj0b7x0b6lk.jpeg" alt="Muebles de Granero 29" loading="lazy"><div class="g-overlay"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+        </div>
     </div>
   </section>
 
@@ -318,6 +338,7 @@
   const gg=document.getElementById('gallery-grid');
   const gio=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const items=x.target.querySelectorAll('.g-item');items.forEach((item,i)=>{item.style.transition=`opacity .7s ease ${i*60}ms,transform .75s ${EASE} ${i*60}ms`;requestAnimationFrame(()=>item.classList.add('in'));});gio.unobserve(x.target);setTimeout(()=>items.forEach(item=>item.style.transition=''),items.length*60+800);});},{threshold:.05});
   if(gg) gio.observe(gg);
+  window.addEventListener('load',function(){setTimeout(function(){document.querySelectorAll('.g-item:not(.in)').forEach(function(el){el.classList.add('in');});},800);});
   const IMGS=[
     'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/fabricados-18-qwmbipc7ij8zrzpu80rf5d1frm8u1kzgekzmloc3s8.jpeg',
     'https://mueblesdegranero.es/wp-content/uploads/elementor/thumbs/muebles-AA-qwmbyolfp54h5ci8wxf3jbvjbfhgwcf6lo8sb0n608.jpeg',
